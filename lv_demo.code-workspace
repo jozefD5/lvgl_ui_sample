@@ -18,6 +18,7 @@
 	},
 	// settings.json section
 	"settings": {
+		"editor.mouseWheelZoom": true,
 		"files.trimTrailingWhitespace": true,
 		"files.insertFinalNewline": true,
 		"files.trimFinalNewlines": true,

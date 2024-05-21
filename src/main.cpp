@@ -3,18 +3,24 @@
 #include <unistd.h>
 #include "lvgl/lvgl.h"
 
-
+/*******************************************************************************
+ * Function prototype
+ ******************************************************************************/
 static lv_display_t * hal_init(int32_t w, int32_t h);
-
 void main_tab_view(void);
+
+
+/*******************************************************************************
+ * Private Static variables
+ ******************************************************************************/
+lv_obj_t* main_tab;
+lv_obj_t* overview_tab;
+
 
 
 int main(int argc, char **argv) {
     (void)argc; /*Unused*/
     (void)argv; /*Unused*/
-
-    std::cout << "UI Test"  << std::endl;
-
 
     /*Initialize LVGL*/
     lv_init();
@@ -78,17 +84,24 @@ void main_tab_view(void)
   lv_obj_t* tab_view = lv_tabview_create(lv_scr_act());
   lv_tabview_set_tab_bar_position(tab_view, LV_DIR_BOTTOM);
 
-  lv_obj_t* tab1 = lv_tabview_add_tab(tab_view, "tab 1");
-  lv_obj_t* tab2 = lv_tabview_add_tab(tab_view, "tab 2");
-  lv_obj_t* tab3 = lv_tabview_add_tab(tab_view, "tab 3");
+  lv_obj_t* main_tab = lv_tabview_add_tab(tab_view, "Main Menu");
+  lv_obj_t* overview_tab = lv_tabview_add_tab(tab_view, "Overview");
+
 
   // Window.
-  // lv_obj_t * win1 = lv_win_create(tab1);
-  // lv_win_add_title(win1, "Main Menu");
+  lv_obj_t * win1 = lv_win_create(main_tab);
+  lv_win_add_title(win1, "Main Menu");
+
+  lv_obj_t * win2 = lv_win_create(overview_tab);
+  lv_win_add_title(win2, "Overview");
+
+
+
+
 
   // Chart.
-  lv_obj_t* chart = lv_chart_create(tab1);
-  lv_obj_set_size(chart, 1000, 600);
+  lv_obj_t* chart = lv_chart_create(main_tab);
+  lv_obj_set_size(chart, 800, 400);
   lv_obj_align(chart, LV_ALIGN_CENTER,0,0);
   lv_chart_set_type(chart, LV_CHART_TYPE_LINE);
 
