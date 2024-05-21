@@ -1,0 +1,59 @@
+{
+    "folders": [
+		{
+			"path": "."
+		},
+	],
+    // extensions.json section
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",              // common C/C++ support
+			"ms-vscode.cpptools-themes",       // general C/C++ theme
+			"ms-vscode.cmake-tools",            // cmake support
+			"bbenoist.Doxygen",
+			"streetsidesoftware.code-spell-checker",
+		],
+		"unwantedRecommendations": [
+		]
+	},
+	// settings.json section
+	"settings": {
+		"files.trimTrailingWhitespace": true,
+		"files.insertFinalNewline": true,
+		"files.trimFinalNewlines": true,
+		"cmake.configureOnOpen": false,
+		"files.associations": {
+			"string.h": "c",
+			"lvgl.h": "c"
+		},
+		"cSpell.languageSettings": [
+			// Spell check for cpp and c files
+			{
+				"languageId": "cpp,c",
+				// Turn off compound words, because it is only checking strings.
+				"allowCompoundWords": false,
+				// Only check comments and strings
+				"includeRegExpList": [
+					"CStyleComment",
+					"string"
+				],
+				// Exclude includes, because they are also strings.
+				"ignoreRegExpList": [
+					"/#include.*/"
+				]
+			}
+		],
+		"doxdocgen.c.firstLine": "/*******************************************************************************",
+    	"doxdocgen.c.lastLine": " ******************************************************************************/",
+    	"doxdocgen.generic.order": [
+			"file",
+			"brief",
+			"empty",
+			"param",
+			"empty",
+			"return"
+    	],
+
+	},
+
+}
