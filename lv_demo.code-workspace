@@ -23,8 +23,10 @@
 		"files.trimFinalNewlines": true,
 		"cmake.configureOnOpen": false,
 		"files.associations": {
+			"*.py": "python",
 			"string.h": "c",
-			"lvgl.h": "c"
+			"lvgl.h": "c",
+			"iostream": "cpp"
 		},
 		"cSpell.languageSettings": [
 			// Spell check for cpp and c files
