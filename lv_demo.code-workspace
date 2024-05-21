@@ -7,9 +7,9 @@
     // extensions.json section
 	"extensions": {
 		"recommendations": [
-			"ms-vscode.cpptools",              // common C/C++ support
-			"ms-vscode.cpptools-themes",       // general C/C++ theme
-			"ms-vscode.cmake-tools",            // cmake support
+			"ms-vscode.cpptools",
+			"ms-vscode.cpptools-themes",
+			"ms-vscode.cmake-tools",
 			"bbenoist.Doxygen",
 			"streetsidesoftware.code-spell-checker",
 		],
@@ -21,12 +21,29 @@
 		"files.trimTrailingWhitespace": true,
 		"files.insertFinalNewline": true,
 		"files.trimFinalNewlines": true,
-		"cmake.configureOnOpen": false,
+		"cmake.configureOnOpen": true,
+		"cmake.options.statusBarVisibility": "icon",
+		"cmake.options.advanced": {
+
+			"build": {
+				"statusBarVisibility": "inherit",
+				"inheritDefault": "visible"
+			},
+			"launch": {
+				"statusBarVisibility": "inherit",
+				"inheritDefault": "visible"
+			},
+			"debug": {
+				"statusBarVisibility": "inherit",
+				"inheritDefault": "visible"
+			}
+		},
 		"files.associations": {
 			"*.py": "python",
 			"string.h": "c",
 			"lvgl.h": "c",
-			"iostream": "cpp"
+			"iostream": "cpp",
+			"pthread.h": "c"
 		},
 		"cSpell.languageSettings": [
 			// Spell check for cpp and c files
@@ -55,7 +72,70 @@
 			"empty",
 			"return"
     	],
-
 	},
-
+	// tasks.json section
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Build",
+				"command": "cmake",
+				"args": [
+					"--build", "${command:cmake.buildDirectory}"
+				],
+				"group": {
+					"kind": "build",
+					"isDefault": true
+				},
+				"problemMatcher": {
+					"owner": "cpp",
+					"fileLocation": ["relative", "${workspaceFolder}"],
+					"pattern": {
+						"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+						"file": 1,
+						"line": 2,
+						"column": 3,
+						"severity": 4,
+						"message": 5
+					}
+				}
+			},
+			{
+				"label": "Build and Run",
+				"type": "shell",
+				"command": "${workspaceFolder}/build/bin/lvgl_ui_demo",
+				"group": {
+					"kind": "test",
+					"isDefault": true
+				},
+				"dependsOn": "Build"
+			}
+		],
+	},
+	// launch.json section
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Debug LVGL demo with gdb",
+				"type": "cppdbg",
+				"request": "launch",
+		        "program": "${workspaceFolder}/build/bin/lvgl_ui_demo",
+				"args": [],
+				"cwd": "${workspaceFolder}",
+				"preLaunchTask": "Build",
+				"stopAtEntry": false,
+			},
+			{
+				"name": "Debug LVGL demo with LLVM",
+				"type": "cppdbg",
+				"request": "launch",
+		        "program": "${workspaceFolder}/build/bin/lvgl_ui_demo",
+				"args": [],
+				"cwd": "${workspaceFolder}",
+				"preLaunchTask": "Build",
+				"stopAtEntry": false,
+			},
+		],
+	},
 }

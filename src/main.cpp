@@ -1,11 +1,15 @@
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <unistd.h>
+// #include <pthread.h>
+
 #include <iostream>
-#include "main.h"
+#include "lvgl/lvgl.h"
 
 
 int main() {
 
-    std::cout << "UI test" << std::endl;
-
+    std::cout << "UI Test"  << std::endl;
 
     return 0;
 }
