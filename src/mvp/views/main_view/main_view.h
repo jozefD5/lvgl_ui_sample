@@ -12,6 +12,9 @@ class MainView {
         lv_obj_t* mainLabel;
         IBaseView* subscriber;
 
+    private:
+        static void button_event_callback(lv_event_t *e);
+
     public:
         MainView();
         ~MainView() = default;
