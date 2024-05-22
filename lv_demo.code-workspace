@@ -22,6 +22,9 @@
 		"files.trimTrailingWhitespace": true,
 		"files.insertFinalNewline": true,
 		"files.trimFinalNewlines": true,
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+		"editor.detectIndentation": true,
 		"cmake.configureOnOpen": true,
 		"cmake.options.statusBarVisibility": "icon",
 		"cmake.options.advanced": {

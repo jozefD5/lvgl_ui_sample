@@ -2,19 +2,21 @@
 #include <iostream>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
+#include "views/main_view/main_view.h"
+#include "presenters/main_presenter/main_presenter.h"
+
 
 /*******************************************************************************
  * Function prototype
  ******************************************************************************/
 static lv_display_t * hal_init(int32_t w, int32_t h);
-void main_tab_view(void);
 
 
 /*******************************************************************************
  * Private Static variables
  ******************************************************************************/
-lv_obj_t* main_tab;
-lv_obj_t* overview_tab;
+
+
 
 
 
@@ -28,11 +30,16 @@ int main(int argc, char **argv) {
     /*Initialize the HAL (display, input devices, tick) for LVGL*/
     hal_init(1280, 720);
 
-    main_tab_view();
+    // Main view.
+    MainView mainView;
+    DemoModel demoModel(0, 0);
+
+    MainPresenter mainPresenter(&mainView, &demoModel);
+    mainPresenter.updateAllValues(1,2);
 
     while(1) {
-        lv_timer_handler();
-        usleep(5 * 1000);
+      lv_timer_handler();
+      usleep(5 * 1000);
     }
 
     return 0;
@@ -76,46 +83,4 @@ static lv_display_t * hal_init(int32_t w, int32_t h)
   lv_indev_set_group(kb, lv_group_get_default());
 
   return disp;
-}
-
-
-void main_tab_view(void)
-{
-  lv_obj_t* tab_view = lv_tabview_create(lv_scr_act());
-  lv_tabview_set_tab_bar_position(tab_view, LV_DIR_BOTTOM);
-
-  lv_obj_t* main_tab = lv_tabview_add_tab(tab_view, "Main Menu");
-  lv_obj_t* overview_tab = lv_tabview_add_tab(tab_view, "Overview");
-
-
-  // Window.
-  lv_obj_t * win1 = lv_win_create(main_tab);
-  lv_win_add_title(win1, "Main Menu");
-
-  lv_obj_t * win2 = lv_win_create(overview_tab);
-  lv_win_add_title(win2, "Overview");
-
-
-
-
-
-  // Chart.
-  lv_obj_t* chart = lv_chart_create(main_tab);
-  lv_obj_set_size(chart, 800, 400);
-  lv_obj_align(chart, LV_ALIGN_CENTER,0,0);
-  lv_chart_set_type(chart, LV_CHART_TYPE_LINE);
-
-  lv_chart_series_t* series1 = lv_chart_add_series(chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
-  lv_chart_set_next_value(chart, series1, 50);
-  lv_chart_set_next_value(chart, series1, 100);
-  lv_chart_set_next_value(chart, series1, 30);
-  lv_chart_set_next_value(chart, series1, 70);
-  lv_chart_set_next_value(chart, series1, 50);
-  lv_chart_set_next_value(chart, series1, 100);
-  lv_chart_set_next_value(chart, series1, 30);
-  lv_chart_set_next_value(chart, series1, 70);
-  lv_chart_set_next_value(chart, series1, 50);
-  lv_chart_set_next_value(chart, series1, 100);
-  lv_chart_set_next_value(chart, series1, 30);
-  lv_chart_set_next_value(chart, series1, 70);
 }
