@@ -31,11 +31,10 @@ int main(int argc, char **argv) {
     hal_init(1280, 720);
 
     // Main view.
-    MainView mainView;
-    DemoModel demoModel(0, 0);
+    LvUi::MainView mainView;
+    LvUi::DemoModel demoModel(0, 0);
 
-    MainPresenter mainPresenter(&mainView, &demoModel);
-    mainPresenter.updateAllValues(1,2);
+    LvUi::MainPresenter mainPresenter(&mainView, &demoModel);
 
     while(1) {
       lv_timer_handler();

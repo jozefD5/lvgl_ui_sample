@@ -1,18 +1,22 @@
 #pragma once
 
-class DemoModel {
-    private:
-        int demo_value_1;
-        int demo_value_2;
+namespace LvUi {
 
-    public:
-        DemoModel(int val1, int val2);
+    class DemoModel {
+        private:
+            int demo_value_1;
+            int demo_value_2;
 
-        void setValue1(int val1);
+        public:
+            DemoModel(int val1, int val2);
 
-        void setValue2(int val2);
+            void setValue1(int val1);
 
-        int getValue1();
+            void setValue2(int val2);
 
-        int getValue2();
-};
+            int getValue1();
+
+            int getValue2();
+    };
+
+}
