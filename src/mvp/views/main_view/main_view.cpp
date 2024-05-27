@@ -59,6 +59,7 @@ namespace LvUi {
         lv_style_set_radius(&chart_style, 10);
         lv_style_set_border_color(&chart_style,lv_color_hex(CHART_BACKGROUND_COLOR));
         lv_style_set_bg_color(&chart_style, lv_color_hex(CHART_BACKGROUND_COLOR));
+        lv_obj_add_style(chart, &chart_style, LV_PART_MAIN);
 
         ser = lv_chart_add_series(chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
         uint32_t i;
@@ -73,7 +74,6 @@ namespace LvUi {
         lv_style_set_border_color(&lb_bg_style,lv_color_hex(CHART_BACKGROUND_COLOR));
         lv_style_set_bg_color(&lb_bg_style, lv_color_hex(CHART_BACKGROUND_COLOR));
 
-        // Create an object with the new style.
         lv_obj_t * lb_bg_obj = lv_obj_create(chart);
         lv_obj_add_style(lb_bg_obj, &lb_bg_style, 0);
 
@@ -81,15 +81,7 @@ namespace LvUi {
         lv_label_set_text(chart_lb, "ECG Waveform");
         lv_obj_set_style_text_align(chart_lb, LV_TEXT_ALIGN_LEFT, 0);
         lv_obj_align(chart_lb, LV_ALIGN_CENTER, 0, 0);
-
-        static lv_style_t chart_label_style;
-        lv_style_set_text_color(&chart_label_style, lv_color_hex(0xffffff));
-        lv_obj_add_style(chart_lb, &chart_label_style,LV_PART_MAIN);
-        lv_obj_add_style(chart, &chart_style, LV_PART_MAIN);
-
-
-
-
+        lv_obj_set_style_text_color(chart_lb, lv_color_hex(0xffffff), LV_PART_MAIN);
 
 
         // Heart beat label.
@@ -107,23 +99,22 @@ namespace LvUi {
         lv_obj_t * hb_label = lv_label_create(lb_hb_bg_obj);
         lv_label_set_text(hb_label, "120");
         lv_obj_set_style_text_align(hb_label, LV_TEXT_ALIGN_CENTER, 0);
-        lv_obj_align(hb_label, LV_ALIGN_CENTER, 0, 0);
+        lv_obj_align(hb_label, LV_ALIGN_LEFT_MID, 10, 0);
+        lv_obj_set_style_text_font(hb_label, &lv_font_montserrat_48, LV_PART_MAIN);
+        lv_obj_set_style_text_color(hb_label, lv_color_hex(0xffffff), LV_PART_MAIN);
 
-        static lv_style_t style;
-        lv_style_init(&style);
-        lv_style_set_text_font(&style, &lv_font_montserrat_10);
-        lv_obj_add_style(hb_label, &style, 0);
+        lv_obj_t * hb_label_bmp = lv_label_create(lb_hb_bg_obj);
+        lv_label_set_text(hb_label_bmp, "bmp");
+        lv_obj_set_style_text_align(hb_label_bmp, LV_TEXT_ALIGN_CENTER, 0);
+        lv_obj_align(hb_label_bmp, LV_ALIGN_RIGHT_MID, 10, 0);
+        lv_obj_set_style_text_font(hb_label_bmp, &lv_font_montserrat_40, LV_PART_MAIN);
+        lv_obj_set_style_text_color(hb_label_bmp, lv_color_hex(0xffffff), LV_PART_MAIN);
 
 
-        // lv_obj_t * chart_lb = lv_label_create(lb_bg_obj);
-        // lv_label_set_text(chart_lb, "HB");
-        // lv_obj_set_style_text_align(chart_lb, LV_TEXT_ALIGN_LEFT, 0);
-        // lv_obj_align(chart_lb, LV_ALIGN_CENTER, 0, 0);
 
-        // static lv_style_t chart_label_style;
-        // lv_style_set_text_color(&chart_label_style, lv_color_hex(0xffffff));
-        // lv_obj_add_style(chart_lb, &chart_label_style,LV_PART_MAIN);
-        // lv_obj_add_style(chart, &chart_style, LV_PART_MAIN);
+
+
+
 
 
 

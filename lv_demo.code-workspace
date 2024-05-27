@@ -10,7 +10,7 @@
 			"ms-vscode.cpptools",
 			"ms-vscode.cpptools-themes",
 			"ms-vscode.cmake-tools",
-			"bbenoist.Doxygen",
+			"cschlosser.doxdocgen",
 			"streetsidesoftware.code-spell-checker",
 		],
 		"unwantedRecommendations": [
