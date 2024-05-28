@@ -7,7 +7,7 @@
 
 namespace LvUi {
 
-    class MainView : public IBaseView {
+    class EcgView : public IBaseView {
         private:
             // lv_obj_t* mainBtn;
             // lv_obj_t* mainLabel;
@@ -16,8 +16,8 @@ namespace LvUi {
             static void button_event_callback(lv_event_t *e);
 
         public:
-            MainView();
-            ~MainView() = default;
+            EcgView();
+            ~EcgView() = default;
 
             void create();
 

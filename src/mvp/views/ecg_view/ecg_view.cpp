@@ -1,6 +1,6 @@
 #include <iostream>
 #include <unistd.h>
-#include "main_view.h"
+#include "ecg_view.h"
 #include "lvgl/lvgl.h"
 #include "interfaces/base_view/i_base_view.h"
 #include <functional>
@@ -11,9 +11,9 @@
 
 namespace LvUi {
 
-    MainView::MainView() {}
+    EcgView::EcgView() {}
 
-    void MainView::button_event_callback(lv_event_t *e)
+    void EcgView::button_event_callback(lv_event_t *e)
     {
         // Cast pointer as view object pointer.
         void* void_view_ptr = lv_event_get_user_data(e);
@@ -22,14 +22,14 @@ namespace LvUi {
         view_ptr->notifyPresenter(NULL);
     }
 
-    void MainView::create() {
+    void EcgView::create() {
         static lv_obj_t * chart;
         static lv_chart_series_t * ser;
         static lv_chart_cursor_t * cursor;
 
         // Grid.
-        static int32_t col_dsc[] = {900, 300, LV_GRID_TEMPLATE_LAST};
-        static int32_t row_dsc[] = {350, 350, LV_GRID_TEMPLATE_LAST};
+        static int32_t col_dsc[] = {300, 300, 300, 300, LV_GRID_TEMPLATE_LAST};
+        static int32_t row_dsc[] = {100, 550, LV_GRID_TEMPLATE_LAST};
 
         // Background color.
         lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
@@ -49,10 +49,10 @@ namespace LvUi {
         lv_obj_add_style(cont, &grid_style,LV_PART_MAIN);
 
 
-        // Initilize chart.
+        // Initialize chart.
         chart = lv_chart_create(cont);
         lv_obj_set_size(chart, 900, 350);
-        lv_obj_set_grid_cell(chart, LV_GRID_ALIGN_STRETCH, 0, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
+        lv_obj_set_grid_cell(chart, LV_GRID_ALIGN_STRETCH, 0, 4, LV_GRID_ALIGN_STRETCH, 1, 1);
 
         static lv_style_t chart_style;
         lv_style_init(&chart_style);
@@ -84,31 +84,31 @@ namespace LvUi {
         lv_obj_set_style_text_color(chart_lb, lv_color_hex(0xffffff), LV_PART_MAIN);
 
 
-        // Heart beat label.
-        static lv_style_t lb_hb_bg_style;
-        lv_style_init(&lb_hb_bg_style);
-        lv_style_set_size(&lb_hb_bg_style, 200, 25);
-        lv_style_set_border_color(&lb_hb_bg_style,lv_color_hex(CHART_BACKGROUND_COLOR));
-        lv_style_set_bg_color(&lb_hb_bg_style, lv_color_hex(CHART_BACKGROUND_COLOR));
+        // // Heart beat label.
+        // static lv_style_t lb_hb_bg_style;
+        // lv_style_init(&lb_hb_bg_style);
+        // lv_style_set_size(&lb_hb_bg_style, 200, 25);
+        // lv_style_set_border_color(&lb_hb_bg_style,lv_color_hex(CHART_BACKGROUND_COLOR));
+        // lv_style_set_bg_color(&lb_hb_bg_style, lv_color_hex(CHART_BACKGROUND_COLOR));
 
-        // Create an object with the new style.
-        lv_obj_t * lb_hb_bg_obj = lv_obj_create(cont);
-        lv_obj_add_style(lb_hb_bg_obj, &lb_hb_bg_style, 0);
-        lv_obj_set_grid_cell(lb_hb_bg_obj, LV_GRID_ALIGN_STRETCH, 1, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
+        // // Create an object with the new style.
+        // lv_obj_t * lb_hb_bg_obj = lv_obj_create(cont);
+        // lv_obj_add_style(lb_hb_bg_obj, &lb_hb_bg_style, 0);
+        // lv_obj_set_grid_cell(lb_hb_bg_obj, LV_GRID_ALIGN_STRETCH, 1, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
 
-        lv_obj_t * hb_label = lv_label_create(lb_hb_bg_obj);
-        lv_label_set_text(hb_label, "120");
-        lv_obj_set_style_text_align(hb_label, LV_TEXT_ALIGN_CENTER, 0);
-        lv_obj_align(hb_label, LV_ALIGN_LEFT_MID, 10, 0);
-        lv_obj_set_style_text_font(hb_label, &lv_font_montserrat_48, LV_PART_MAIN);
-        lv_obj_set_style_text_color(hb_label, lv_color_hex(0xffffff), LV_PART_MAIN);
+        // lv_obj_t * hb_label = lv_label_create(lb_hb_bg_obj);
+        // lv_label_set_text(hb_label, "120");
+        // lv_obj_set_style_text_align(hb_label, LV_TEXT_ALIGN_CENTER, 0);
+        // lv_obj_align(hb_label, LV_ALIGN_LEFT_MID, 10, 0);
+        // lv_obj_set_style_text_font(hb_label, &lv_font_montserrat_48, LV_PART_MAIN);
+        // lv_obj_set_style_text_color(hb_label, lv_color_hex(0xffffff), LV_PART_MAIN);
 
-        lv_obj_t * hb_label_bmp = lv_label_create(lb_hb_bg_obj);
-        lv_label_set_text(hb_label_bmp, "bmp");
-        lv_obj_set_style_text_align(hb_label_bmp, LV_TEXT_ALIGN_CENTER, 0);
-        lv_obj_align(hb_label_bmp, LV_ALIGN_RIGHT_MID, 10, 0);
-        lv_obj_set_style_text_font(hb_label_bmp, &lv_font_montserrat_40, LV_PART_MAIN);
-        lv_obj_set_style_text_color(hb_label_bmp, lv_color_hex(0xffffff), LV_PART_MAIN);
+        // lv_obj_t * hb_label_bmp = lv_label_create(lb_hb_bg_obj);
+        // lv_label_set_text(hb_label_bmp, "bmp");
+        // lv_obj_set_style_text_align(hb_label_bmp, LV_TEXT_ALIGN_CENTER, 0);
+        // lv_obj_align(hb_label_bmp, LV_ALIGN_RIGHT_MID, 10, 0);
+        // lv_obj_set_style_text_font(hb_label_bmp, &lv_font_montserrat_40, LV_PART_MAIN);
+        // lv_obj_set_style_text_color(hb_label_bmp, lv_color_hex(0xffffff), LV_PART_MAIN);
 
 
 
@@ -128,7 +128,7 @@ namespace LvUi {
 
 
 
-    void MainView::updateLabel1(std::string str) {
+    void EcgView::updateLabel1(std::string str) {
         // lv_label_set_text(mainLabel, str.c_str());
     }
 

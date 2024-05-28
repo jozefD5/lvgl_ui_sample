@@ -2,13 +2,13 @@
 
 namespace LvUi {
 
-    class DemoModel {
+    class EcgModel {
         private:
             int demo_value_1;
             int demo_value_2;
 
         public:
-            DemoModel(int val1, int val2);
+            EcgModel(int val1, int val2);
 
             void setValue1(int val1);
 

@@ -2,8 +2,8 @@
 #include <iostream>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
-#include "views/main_view/main_view.h"
-#include "presenters/main_presenter/main_presenter.h"
+#include "views/ecg_view/ecg_view.h"
+#include "presenters/ecg_presenter/ecg_presenter.h"
 
 
 /*******************************************************************************
@@ -31,10 +31,10 @@ int main(int argc, char **argv) {
     hal_init(1280, 720);
 
     // Main view.
-    LvUi::MainView mainView;
-    LvUi::DemoModel demoModel(0, 0);
+    LvUi::EcgView ecgView;
+    LvUi::EcgModel ecgModel(0, 0);
 
-    LvUi::MainPresenter mainPresenter(&mainView, &demoModel);
+    LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
 
     while(1) {
       lv_timer_handler();
