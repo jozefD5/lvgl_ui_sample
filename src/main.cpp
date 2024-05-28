@@ -5,6 +5,9 @@
 #include "views/ecg_view/ecg_view.h"
 #include "presenters/ecg_presenter/ecg_presenter.h"
 
+#define SCREEN_SIZE_W     1280
+#define SCREEN_SIZE_H     720
+
 
 /*******************************************************************************
  * Function prototype
@@ -28,10 +31,10 @@ int main(int argc, char **argv) {
     lv_init();
 
     /*Initialize the HAL (display, input devices, tick) for LVGL*/
-    hal_init(1280, 720);
+    hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
 
     // Main view.
-    LvUi::EcgView ecgView;
+    LvUi::EcgView ecgView(SCREEN_SIZE_W, SCREEN_SIZE_H);
     LvUi::EcgModel ecgModel(0, 0);
 
     LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);

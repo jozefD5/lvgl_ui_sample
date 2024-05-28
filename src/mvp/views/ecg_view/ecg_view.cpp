@@ -9,10 +9,29 @@
 #define CHART_BACKGROUND_COLOR         0x003566
 
 
+
 namespace LvUi {
 
-    EcgView::EcgView() {}
 
+    EcgView::EcgView(int32_t t_view_w, int32_t t_view_h)
+    {
+        int32_t width_length = (t_view_w - 10) / 4;   // Use 10px as safe are.
+        int32_t centre_hight = t_view_h - 110;        // 100px for header and 10 for safe area.
+
+        // configure container.
+        int32_t col_dsc[] = {width_length, width_length, width_length, width_length, LV_GRID_TEMPLATE_LAST};
+        int32_t row_dsc[] = {100, centre_hight, LV_GRID_TEMPLATE_LAST};
+
+        auto col_size = sizeof(col_dsc) / sizeof(col_dsc[0]);
+        auto row_size = sizeof(row_dsc) / sizeof(row_dsc[0]);
+
+        std::copy(col_dsc, col_dsc + col_size, std::back_inserter(m_container_col_dsc));
+        std::copy(col_dsc, col_dsc + col_size, std::back_inserter(m_container_row_dsc));
+
+        create(t_view_w, t_view_h);
+    }
+
+    /*
     void EcgView::button_event_callback(lv_event_t *e)
     {
         // Cast pointer as view object pointer.
@@ -21,36 +40,33 @@ namespace LvUi {
 
         view_ptr->notifyPresenter(NULL);
     }
+    */
 
-    void EcgView::create() {
+
+    void EcgView::create(int32_t t_view_w, int32_t t_view_h)
+    {
         static lv_obj_t * chart;
         static lv_chart_series_t * ser;
         static lv_chart_cursor_t * cursor;
 
-        // Grid.
-        static int32_t col_dsc[] = {300, 300, 300, 300, LV_GRID_TEMPLATE_LAST};
-        static int32_t row_dsc[] = {100, 550, LV_GRID_TEMPLATE_LAST};
-
-        // Background color.
+        // Main view background color.
         lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
 
-        // Create a container with grid.
-        lv_obj_t * cont = lv_obj_create(lv_screen_active());
-        lv_obj_set_style_grid_column_dsc_array(cont, col_dsc, 0);
-        lv_obj_set_style_grid_row_dsc_array(cont, row_dsc, 0);
-        lv_obj_set_size(cont, 1270, 710);
-        lv_obj_center(cont);
-        lv_obj_set_layout(cont, LV_LAYOUT_GRID);
+        // Setup main container.
+        m_container = lv_obj_create(lv_screen_active());
+        lv_obj_set_style_grid_column_dsc_array(m_container, &m_container_col_dsc[0], 0);
+        lv_obj_set_style_grid_row_dsc_array(m_container, &m_container_row_dsc[0], 0);
+        lv_obj_set_size(m_container, t_view_w, t_view_h);
+        lv_obj_center(m_container);
+        lv_obj_set_layout(m_container, LV_LAYOUT_GRID);
+        lv_obj_set_style_bg_color(m_container, lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
+        lv_obj_set_style_border_color(m_container, lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
 
-        static lv_style_t grid_style;
-        lv_style_init(&grid_style);
-        lv_style_set_bg_color(&grid_style, lv_color_hex(BACKGROUN_COLOR));
-        lv_style_set_border_color(&grid_style,lv_color_hex(BACKGROUN_COLOR));
-        lv_obj_add_style(cont, &grid_style,LV_PART_MAIN);
+
 
 
         // Initialize chart.
-        chart = lv_chart_create(cont);
+        chart = lv_chart_create(m_container);
         lv_obj_set_size(chart, 900, 350);
         lv_obj_set_grid_cell(chart, LV_GRID_ALIGN_STRETCH, 0, 4, LV_GRID_ALIGN_STRETCH, 1, 1);
 
@@ -84,6 +100,12 @@ namespace LvUi {
         lv_obj_set_style_text_color(chart_lb, lv_color_hex(0xffffff), LV_PART_MAIN);
 
 
+
+
+
+
+
+
         // // Heart beat label.
         // static lv_style_t lb_hb_bg_style;
         // lv_style_init(&lb_hb_bg_style);
@@ -92,7 +114,7 @@ namespace LvUi {
         // lv_style_set_bg_color(&lb_hb_bg_style, lv_color_hex(CHART_BACKGROUND_COLOR));
 
         // // Create an object with the new style.
-        // lv_obj_t * lb_hb_bg_obj = lv_obj_create(cont);
+        // lv_obj_t * lb_hb_bg_obj = lv_obj_create(m_container);
         // lv_obj_add_style(lb_hb_bg_obj, &lb_hb_bg_style, 0);
         // lv_obj_set_grid_cell(lb_hb_bg_obj, LV_GRID_ALIGN_STRETCH, 1, 1, LV_GRID_ALIGN_STRETCH, 0, 1);
 
@@ -109,17 +131,6 @@ namespace LvUi {
         // lv_obj_align(hb_label_bmp, LV_ALIGN_RIGHT_MID, 10, 0);
         // lv_obj_set_style_text_font(hb_label_bmp, &lv_font_montserrat_40, LV_PART_MAIN);
         // lv_obj_set_style_text_color(hb_label_bmp, lv_color_hex(0xffffff), LV_PART_MAIN);
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

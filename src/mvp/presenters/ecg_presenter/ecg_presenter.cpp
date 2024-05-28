@@ -8,7 +8,7 @@ namespace LvUi {
 
     EcgPresenter::EcgPresenter(EcgView* view, EcgModel* ecgModel): view(view), ecgModel(ecgModel) {
         view->setSubscriber(this);
-        view->create();
+        // view->create();
     }
 
     void EcgPresenter::updateAllValues(int val1, int val2) {
