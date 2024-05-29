@@ -24,7 +24,14 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE LV_CONF_INCLUDE_SIMPLE)
 set(LV_CONF_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lv_conf.h CACHE STRING "" FORCE)
 
 add_subdirectory(lvgl)
-target_link_libraries(${PROJECT_NAME} lvgl lvgl::thorvg ${SDL2_LIBRARIES} m pthread)
+add_subdirectory(${CMAKE_SOURCE_DIR}/src/mvp)
+target_link_libraries(
+    ${PROJECT_NAME}
+    ${SDL2_LIBRARIES}
+    lvgl lvgl::thorvg
+    m pthread
+    mpv
+)
 
 
 if(LV_USE_DRAW_SDL)

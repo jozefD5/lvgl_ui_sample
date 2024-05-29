@@ -2,31 +2,51 @@
 #include <iostream>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
+#include "views/ecg_view/ecg_view.h"
+#include "presenters/ecg_presenter/ecg_presenter.h"
+
+#define SCREEN_SIZE_W     1280
+#define SCREEN_SIZE_H     720
 
 
+/*******************************************************************************
+ * Function prototype
+ ******************************************************************************/
 static lv_display_t * hal_init(int32_t w, int32_t h);
 
-void main_tab_view(void);
+
+/*******************************************************************************
+ * Private Static variables
+ ******************************************************************************/
+
+
+
 
 
 int main(int argc, char **argv) {
     (void)argc; /*Unused*/
     (void)argv; /*Unused*/
 
-    std::cout << "UI Test"  << std::endl;
-
-
     /*Initialize LVGL*/
     lv_init();
 
     /*Initialize the HAL (display, input devices, tick) for LVGL*/
-    hal_init(1280, 720);
+    hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
 
-    main_tab_view();
+    // Main view background color.
+    lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
+
+
+
+    // Main view.
+    LvUi::EcgView ecgView(SCREEN_SIZE_W, SCREEN_SIZE_H);
+    LvUi::EcgModel ecgModel(0, 0);
+
+    LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
 
     while(1) {
-        lv_timer_handler();
-        usleep(5 * 1000);
+      lv_timer_handler();
+      usleep(5 * 1000);
     }
 
     return 0;
@@ -70,39 +90,4 @@ static lv_display_t * hal_init(int32_t w, int32_t h)
   lv_indev_set_group(kb, lv_group_get_default());
 
   return disp;
-}
-
-
-void main_tab_view(void)
-{
-  lv_obj_t* tab_view = lv_tabview_create(lv_scr_act());
-  lv_tabview_set_tab_bar_position(tab_view, LV_DIR_BOTTOM);
-
-  lv_obj_t* tab1 = lv_tabview_add_tab(tab_view, "tab 1");
-  lv_obj_t* tab2 = lv_tabview_add_tab(tab_view, "tab 2");
-  lv_obj_t* tab3 = lv_tabview_add_tab(tab_view, "tab 3");
-
-  // Window.
-  // lv_obj_t * win1 = lv_win_create(tab1);
-  // lv_win_add_title(win1, "Main Menu");
-
-  // Chart.
-  lv_obj_t* chart = lv_chart_create(tab1);
-  lv_obj_set_size(chart, 1000, 600);
-  lv_obj_align(chart, LV_ALIGN_CENTER,0,0);
-  lv_chart_set_type(chart, LV_CHART_TYPE_LINE);
-
-  lv_chart_series_t* series1 = lv_chart_add_series(chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
-  lv_chart_set_next_value(chart, series1, 50);
-  lv_chart_set_next_value(chart, series1, 100);
-  lv_chart_set_next_value(chart, series1, 30);
-  lv_chart_set_next_value(chart, series1, 70);
-  lv_chart_set_next_value(chart, series1, 50);
-  lv_chart_set_next_value(chart, series1, 100);
-  lv_chart_set_next_value(chart, series1, 30);
-  lv_chart_set_next_value(chart, series1, 70);
-  lv_chart_set_next_value(chart, series1, 50);
-  lv_chart_set_next_value(chart, series1, 100);
-  lv_chart_set_next_value(chart, series1, 30);
-  lv_chart_set_next_value(chart, series1, 70);
 }

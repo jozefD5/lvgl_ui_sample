@@ -10,7 +10,7 @@
 			"ms-vscode.cpptools",
 			"ms-vscode.cpptools-themes",
 			"ms-vscode.cmake-tools",
-			"bbenoist.Doxygen",
+			"cschlosser.doxdocgen",
 			"streetsidesoftware.code-spell-checker",
 		],
 		"unwantedRecommendations": [
@@ -18,9 +18,13 @@
 	},
 	// settings.json section
 	"settings": {
+		"editor.mouseWheelZoom": true,
 		"files.trimTrailingWhitespace": true,
 		"files.insertFinalNewline": true,
 		"files.trimFinalNewlines": true,
+		"editor.tabSize": 4,
+		"editor.insertSpaces": true,
+		"editor.detectIndentation": true,
 		"cmake.configureOnOpen": true,
 		"cmake.options.statusBarVisibility": "icon",
 		"cmake.options.advanced": {
