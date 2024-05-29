@@ -42,23 +42,6 @@ namespace LvUi {
     }
     */
 
-    void LvUi::EcgView::initEcgChart(const int32_t t_view_w, const int32_t t_view_h)
-    {
-        m_ecg_chart = lv_chart_create(m_container);
-        lv_obj_set_grid_cell(m_ecg_chart, LV_GRID_ALIGN_START, 0, 3, LV_GRID_ALIGN_STRETCH, 1, 1);
-        lv_obj_set_style_radius(m_ecg_chart, 10, LV_PART_MAIN);
-        lv_obj_set_style_border_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
-
-
-        m_ecg_series = lv_chart_add_series(m_ecg_chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
-
-        // Add demo data.
-        for(uint32_t i = 0; i < 200; i++) {
-            lv_chart_set_next_value(m_ecg_chart, m_ecg_series, lv_rand(-20, 70));
-        }
-    }
-
 
     void EcgView::create(const int32_t t_view_w, const int32_t t_view_h)
     {
@@ -100,8 +83,20 @@ namespace LvUi {
         lv_obj_t *control_btn_label = lv_label_create(control_btn);
         lv_label_set_text(control_btn_label, "Start / Stop");
 
-        // Initialize ecg chart.
-        initEcgChart(container_width, container_height);
+        // ECG chart.
+        m_ecg_chart = lv_chart_create(m_container);
+        lv_obj_set_grid_cell(m_ecg_chart, LV_GRID_ALIGN_START, 0, 3, LV_GRID_ALIGN_STRETCH, 1, 1);
+
+        lv_obj_set_style_radius(m_ecg_chart, 10, LV_PART_MAIN);
+        lv_obj_set_style_border_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
+
+        m_ecg_series = lv_chart_add_series(m_ecg_chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
+
+        // Add demo data.
+        for(uint32_t i = 0; i < 200; i++) {
+            lv_chart_set_next_value(m_ecg_chart, m_ecg_series, lv_rand(-20, 70));
+        }
 
     }
 
