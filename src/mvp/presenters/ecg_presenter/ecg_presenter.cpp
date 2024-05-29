@@ -8,7 +8,7 @@ namespace LvUi {
 
     EcgPresenter::EcgPresenter(EcgView* view, EcgModel* ecgModel): view(view), ecgModel(ecgModel) {
         view->setSubscriber(this);
-        // view->create();
+        view->create();
     }
 
     void EcgPresenter::updateAllValues(int val1, int val2) {
@@ -19,12 +19,22 @@ namespace LvUi {
         view->updateLabel1(str1);
     }
 
-    void EcgPresenter::notifyPresenter(void* p) {
-        std::cout << "Button Pressed!\n\r";
 
-        updateAllValues(
-            this->ecgModel->getValue1()+1,
-            this->ecgModel->getValue2()+1
-        );
+    void EcgPresenter::notifyPresenter(void *p)
+    {
+        std::cout << "Button pressed: 2\n\n\r";
     }
+
+
+
+
+
+    // void EcgPresenter::notifyPresenter(void* p) {
+    //     std::cout << "Button Pressed!\n\r";
+
+    //     updateAllValues(
+    //         this->ecgModel->getValue1()+1,
+    //         this->ecgModel->getValue2()+1
+    //     );
+    // }
 }

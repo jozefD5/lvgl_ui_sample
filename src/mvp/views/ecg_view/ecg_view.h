@@ -20,6 +20,8 @@ namespace LvUi {
 
     class EcgView : public IBaseView {
         private:
+            int32_t m_view_width;                           // View / container's width in pixels
+            int32_t m_view_height;                          // View / container's height in pixels
             int32_t m_container_col_dsc[4];                 // Container columns.
             int32_t m_container_row_dsc[3];                 // Container rows.
             lv_obj_t *m_container;                          // Container.
@@ -28,12 +30,13 @@ namespace LvUi {
             lv_obj_t *control_btn;                          // Enable / disable button.
 
         private:
+            static void button_event_callback(lv_event_t *e);
 
         public:
             EcgView(const int32_t t_view_w, const int32_t t_view_h);
             ~EcgView() = default;
 
-            void create(const int32_t t_view_w, const int32_t t_view_h);
+            void create(void);
 
             void updateLabel1(std::string str);
     };

@@ -3,6 +3,14 @@
 #include "lvgl/lvgl.h"
 #include "views/ecg_view/ecg_view.h"
 
+typedef enum EccPresenterNotifyType {
+    updateEcg,
+    ssButtonPressed,
+} EeccPresenterNotifyType;
+
+
+
+
 namespace LvUi {
 
     class EcgPresenter : public IBasePresenter{
