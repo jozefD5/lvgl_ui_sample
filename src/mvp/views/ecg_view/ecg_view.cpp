@@ -4,16 +4,13 @@
 #include "lvgl/lvgl.h"
 #include "interfaces/base_view/i_base_view.h"
 #include <functional>
-
-
-
+#include <actions/ecg/ecg_events.h>
 
 
 namespace LvUi {
 
-    EcgView::EcgView(const int32_t t_view_w, const int32_t t_view_h): m_view_width(t_view_w), m_view_height(t_view_h)
-    {
-    }
+    EcgView::EcgView(const int32_t t_view_w, const int32_t t_view_h): m_view_width(t_view_w), m_view_height(t_view_h) {}
+
 
     void EcgView::button_event_callback(lv_event_t *e)
     {
@@ -22,7 +19,8 @@ namespace LvUi {
         void* void_presenter_ptr = lv_event_get_user_data(e);
         IBasePresenter* presenter_ptr = static_cast<IBasePresenter *>(void_presenter_ptr);
 
-        presenter_ptr->notifyPresenter(NULL);
+        NEcgButtonPressed eventNotification(0);
+        presenter_ptr->notifyPresenter(&eventNotification);
 
     }
 

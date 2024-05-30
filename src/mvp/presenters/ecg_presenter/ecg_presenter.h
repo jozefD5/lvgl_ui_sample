@@ -13,7 +13,7 @@ typedef enum EccPresenterNotifyType {
 
 namespace LvUi {
 
-    class EcgPresenter : public IBasePresenter{
+    class EcgPresenter : public IBasePresenter {
         private:
             EcgView* view;              // View (UI)
             EcgModel* ecgModel;        // Data model for this view.
@@ -23,7 +23,7 @@ namespace LvUi {
 
             void updateAllValues(int val1, int val2);
 
-            void notifyPresenter(void* p) override;
+            void notifyPresenter(const IBaseNotificationEvent* p) override;
     };
 
 }

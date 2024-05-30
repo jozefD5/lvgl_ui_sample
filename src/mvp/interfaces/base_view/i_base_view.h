@@ -3,6 +3,19 @@
 namespace LvUi {
 
     /*******************************************************************************
+     * @brief Notification event interface, represents notification view can send to
+     *        presenter to notify presenter of any action.
+     ******************************************************************************/
+    class IBaseNotificationEvent {
+        public:
+            // Notification type specific to view, used by presenter to distinguishe
+            // between notifications. e.g. button press = 0 and button hold = 1.
+            int notificationType;
+
+        IBaseNotificationEvent(int type): notificationType(type) {}
+    };
+
+    /*******************************************************************************
      * @brief Base presenter interface, needs to be used with every presenter.
      ******************************************************************************/
     class IBasePresenter {
@@ -10,15 +23,11 @@ namespace LvUi {
             /*******************************************************************************
              * @brief Notify presenter object.
              *
-             * @param selector custom type, usually enum, used to select callback based on
-             *        type of event. e.g. button pressed or input text.
-             * @param p pointer to object to be used as dat source for update action.
-
+             * @param p pointer to object to be used as data source for update action.
+            *
             ******************************************************************************/
-            // virtual void notifyPresenter(const int selector, void* p) = 0;
-            virtual void notifyPresenter(void* p) = 0;
+            virtual void notifyPresenter(const IBaseNotificationEvent* p) = 0;
     };
-
 
     /*******************************************************************************
      * @brief Base view interface, needs to be used with every view.
@@ -38,7 +47,6 @@ namespace LvUi {
             {
                 subscriber = ss;
             }
-
     };
 
 }

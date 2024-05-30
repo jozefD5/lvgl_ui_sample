@@ -20,9 +20,11 @@ namespace LvUi {
     }
 
 
-    void EcgPresenter::notifyPresenter(void *p)
+    void EcgPresenter::notifyPresenter(const IBaseNotificationEvent* p)
     {
-        std::cout << "Button pressed: 2\n\n\r";
+        if(p->notificationType == 0) {
+            std::cout << "Button pressed !!!\n\r";
+        }
     }
 
 
