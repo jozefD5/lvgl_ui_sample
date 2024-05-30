@@ -10,10 +10,12 @@ namespace LvUi {
             /*******************************************************************************
              * @brief Notify presenter object.
              *
+             * @param selector custom type, usually enum, used to select callback based on
+             *        type of event. e.g. button pressed or input text.
              * @param p pointer to object to be used as dat source for update action.
 
             ******************************************************************************/
-            // TODO, use templeate instead of void pointer.
+            // virtual void notifyPresenter(const int selector, void* p) = 0;
             virtual void notifyPresenter(void* p) = 0;
     };
 
@@ -26,8 +28,17 @@ namespace LvUi {
             // Presenter subscriber.
             IBasePresenter* subscriber;
 
-            void setSubscriber(IBasePresenter* ss) {
+            /*******************************************************************************
+             * @brief Set the Subscriber object
+             *
+             * @param ss pointer to subscriber
+             *
+             ******************************************************************************/
+            void setSubscriber(IBasePresenter* ss)
+            {
                 subscriber = ss;
             }
+
     };
+
 }
