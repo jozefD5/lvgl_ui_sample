@@ -30,15 +30,27 @@ namespace LvUi {
             lv_obj_t *control_btn;                          // Enable / disable button.
 
         private:
+            /*******************************************************************************
+             * @brief Static function used as call back for LVGL events.
+             ******************************************************************************/
             static void button_event_callback(lv_event_t *e);
 
         public:
+            /*******************************************************************************
+             * @brief Construct a new Ecg View object
+             *
+             * @param t_view_w view width in pixels.
+             * @param t_view_h view heigth in pixels.
+             *
+             ******************************************************************************/
             EcgView(const int32_t t_view_w, const int32_t t_view_h);
             ~EcgView() = default;
 
+            /*******************************************************************************
+             * @brief Initiate UI.
+             ******************************************************************************/
             void create(void);
 
-            void updateLabel1(std::string str);
     };
 
 }

@@ -19,7 +19,7 @@ namespace LvUi {
         void* void_presenter_ptr = lv_event_get_user_data(e);
         IBasePresenter* presenter_ptr = static_cast<IBasePresenter *>(void_presenter_ptr);
 
-        NEcgButtonPressed eventNotification(0);
+        NEcgSSButtonPressed eventNotification(0);
         presenter_ptr->notifyPresenter(&eventNotification);
 
     }

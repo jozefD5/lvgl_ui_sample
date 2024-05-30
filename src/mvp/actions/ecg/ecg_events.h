@@ -3,9 +3,9 @@
 
 namespace LvUi {
     /*******************************************************************************
-     * @brief
+     * @brief ECG Start/Stop button pressed. Enables/disables demo data for ECG chart.
      ******************************************************************************/
-    class NEcgButtonPressed : public IBaseNotificationEvent {};
+    class NEcgSSButtonPressed : public IBaseNotificationEvent {};
 
 
 

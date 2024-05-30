@@ -3,26 +3,35 @@
 #include "lvgl/lvgl.h"
 #include "views/ecg_view/ecg_view.h"
 
-typedef enum EccPresenterNotifyType {
-    updateEcg,
-    ssButtonPressed,
-} EeccPresenterNotifyType;
-
-
-
 
 namespace LvUi {
 
+    /*******************************************************************************
+     * @brief ECG view presenter. Handels all reruired business logic associated
+     *        with ECG view and ECG data.
+     ******************************************************************************/
     class EcgPresenter : public IBasePresenter {
         private:
             EcgView* view;              // View (UI)
-            EcgModel* ecgModel;        // Data model for this view.
+            EcgModel* ecgModel;         // Data model for this view.
 
         public:
+            /*******************************************************************************
+             * @brief Construct a new Ecg Presenter object
+             *
+             * @param view pointer to ecg view (UI) object.
+             * @param EcgModel pointer to ecg mode (data) object
+             *
+             ******************************************************************************/
             EcgPresenter(EcgView* view, EcgModel* EcgModel);
 
-            void updateAllValues(int val1, int val2);
-
+            /*******************************************************************************
+             * @brief Notify presenter stat changes of the view (UI)
+             *
+             * @param p pointer to notification event. Notification should include any extra
+             *          data if required, such as text .
+             *
+             ******************************************************************************/
             void notifyPresenter(const IBaseNotificationEvent* p) override;
     };
 
