@@ -6,6 +6,13 @@
 
 namespace LvUi {
 
+    // ECG actions/notifications enum.
+    typedef enum {
+        StartStopButtonPressed = 0
+    } ecgEvents_t;
+
+
+
     /*******************************************************************************
      * @brief ECG view presenter. Handels all reruired business logic associated
      *        with ECG view and ECG data.
@@ -13,7 +20,7 @@ namespace LvUi {
     class EcgPresenter : public IBasePresenter {
         private:
             EcgView* view;              // View (UI)
-            EcgModel* ecgModel;         // Data model for this view.
+            EcgModel* state;            // Data model for this view.
 
         public:
             /*******************************************************************************

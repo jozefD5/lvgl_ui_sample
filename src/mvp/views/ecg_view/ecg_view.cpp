@@ -1,10 +1,13 @@
 #include <iostream>
 #include <unistd.h>
+#include <functional>
+#include "interfaces/base_view/i_base_view.h"
+#include "actions/ecg/ecg_events.h"
+#include "presenters/ecg_presenter/ecg_presenter.h"
 #include "ecg_view.h"
 #include "lvgl/lvgl.h"
-#include "interfaces/base_view/i_base_view.h"
-#include <functional>
-#include <actions/ecg/ecg_events.h>
+
+
 
 
 namespace LvUi {
@@ -14,12 +17,11 @@ namespace LvUi {
 
     void EcgView::button_event_callback(lv_event_t *e)
     {
-        std::cout << "Button pressed: 1\n\r";
         // Cast pointer as view object pointer.
         void* void_presenter_ptr = lv_event_get_user_data(e);
         IBasePresenter* presenter_ptr = static_cast<IBasePresenter *>(void_presenter_ptr);
 
-        NEcgSSButtonPressed eventNotification(0);
+        NEcgSSButtonPressed eventNotification(StartStopButtonPressed);
         presenter_ptr->notifyPresenter(&eventNotification);
 
     }
@@ -82,11 +84,6 @@ namespace LvUi {
             lv_chart_set_next_value(m_ecg_chart, m_ecg_series, lv_rand(-20, 70));
         }
 
-    }
-
-
-    void EcgView::updateLabel1(std::string str) {
-        // lv_label_set_text(mainLabel, str.c_str());
     }
 
 }

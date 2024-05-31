@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 
     // Main view.
     LvUi::EcgView ecgView(SCREEN_SIZE_W, SCREEN_SIZE_H);
-    LvUi::EcgModel ecgModel(0, 0);
+    LvUi::EcgModel ecgModel;
 
     LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
 
