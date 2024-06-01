@@ -78,4 +78,8 @@ namespace LvUi {
         lv_obj_set_style_bg_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
     }
 
+    void LvUi::EcgView::notifyView(const IBaseNotificationEvent *p)
+    {
+
+    }
 }

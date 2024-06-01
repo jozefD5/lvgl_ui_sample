@@ -38,6 +38,15 @@ namespace LvUi {
             IBasePresenter* subscriber;
 
             /*******************************************************************************
+             * @brief Notify view of any change. This is used by presenter to notify view if
+             *        model was updated.
+             *
+             * @param p pointer to object to be used as data source for update action.
+             *
+             ******************************************************************************/
+            virtual void notifyView(const IBaseNotificationEvent* p) = 0;
+
+            /*******************************************************************************
              * @brief Set the Subscriber object
              *
              * @param ss pointer to subscriber

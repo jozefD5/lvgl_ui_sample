@@ -14,7 +14,7 @@ namespace LvUi {
 
 
     /*******************************************************************************
-     * @brief ECG view presenter. Handels all reruired business logic associated
+     * @brief ECG view presenter. Handles all required business logic associated
      *        with ECG view and ECG data.
      ******************************************************************************/
     class EcgPresenter : public IBasePresenter {

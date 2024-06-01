@@ -40,7 +40,7 @@ namespace LvUi {
              * @brief Construct a new Ecg View object
              *
              * @param t_view_w view width in pixels.
-             * @param t_view_h view heigth in pixels.
+             * @param t_view_h view height in pixels.
              *
              ******************************************************************************/
             EcgView(const int32_t t_view_w, const int32_t t_view_h);
@@ -50,6 +50,15 @@ namespace LvUi {
              * @brief Initiate UI.
              ******************************************************************************/
             void create(void);
+
+            /*******************************************************************************
+             * @brief Notify view of any change. This is used by presenter to notify view if
+             *        model was updated.
+             *
+             * @param p pointer to notification object.
+             *
+             ******************************************************************************/
+            void notifyView(const IBaseNotificationEvent* p) override;
 
     };
 
