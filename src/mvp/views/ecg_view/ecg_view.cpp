@@ -17,13 +17,12 @@ namespace LvUi {
 
     void EcgView::button_event_callback(lv_event_t *e)
     {
-        // Cast pointer as view object pointer.
+        // Cast pointer as presenter interface object pointer.
         void* void_presenter_ptr = lv_event_get_user_data(e);
         IBasePresenter* presenter_ptr = static_cast<IBasePresenter *>(void_presenter_ptr);
 
         NEcgSSButtonPressed eventNotification(StartStopButtonPressed);
         presenter_ptr->notifyPresenter(&eventNotification);
-
     }
 
 
@@ -73,17 +72,10 @@ namespace LvUi {
         // ECG chart.
         m_ecg_chart = lv_chart_create(m_container);
         lv_obj_set_grid_cell(m_ecg_chart, LV_GRID_ALIGN_START, 0, 3, LV_GRID_ALIGN_STRETCH, 1, 1);
+        lv_chart_set_range(m_ecg_chart, LV_CHART_AXIS_PRIMARY_Y, 0, 60);
         lv_obj_set_style_radius(m_ecg_chart, 10, LV_PART_MAIN);
         lv_obj_set_style_border_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
         lv_obj_set_style_bg_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
-
-        m_ecg_series = lv_chart_add_series(m_ecg_chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
-
-        // Add demo data.
-        for(uint32_t i = 0; i < 200; i++) {
-            lv_chart_set_next_value(m_ecg_chart, m_ecg_series, lv_rand(-20, 70));
-        }
-
     }
 
 }

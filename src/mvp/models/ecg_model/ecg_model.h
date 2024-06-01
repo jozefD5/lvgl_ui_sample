@@ -6,9 +6,9 @@ namespace LvUi {
 
     class EcgModel {
         public:
-            bool ecg_demo_enabled;
-            lv_timer_t *ecg_timer;
-
+            bool m_ecg_demo_enabled;
+            lv_timer_t *m_ecg_timer;
+            lv_chart_series_t *m_ecg_series;
         public:
             EcgModel(void);
 

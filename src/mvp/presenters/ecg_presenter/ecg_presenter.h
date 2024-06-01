@@ -20,7 +20,15 @@ namespace LvUi {
     class EcgPresenter : public IBasePresenter {
         private:
             EcgView* view;              // View (UI)
-            EcgModel* state;            // Data model for this view.
+            EcgModel* model;            // Data model for this view.
+
+        /*******************************************************************************
+         * @brief ECG LVGL demo data timer callback.
+         *
+         * @param timer pointer to LVGL timer.
+         *
+         ******************************************************************************/
+        static void ecg_demo_data_timer_handler(lv_timer_t *timer);
 
         public:
             /*******************************************************************************
@@ -40,6 +48,9 @@ namespace LvUi {
              *
              ******************************************************************************/
             void notifyPresenter(const IBaseNotificationEvent* p) override;
+
+
+
     };
 
 }

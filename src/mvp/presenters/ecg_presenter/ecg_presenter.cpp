@@ -1,38 +1,60 @@
 #include <iostream>
 #include <string>
+#include <functional>
 #include "ecg_presenter.h"
 #include "views/ecg_view/ecg_view.h"
 
 
 namespace LvUi {
 
-    // ECG demo data timer handler, generates demo data as set time interval.
-    static void ecg_demo_data_timer_handler(lv_timer_t *timer)
-    {
-        std::cout << "ECG demo running ...\n\r";
-    }
-
-    EcgPresenter::EcgPresenter(EcgView* view, EcgModel* ecgModel): view(view), state(ecgModel) {
+    EcgPresenter::EcgPresenter(EcgView* view, EcgModel* ecgModel): view(view), model(ecgModel) {
+        // Set view's presenter subscriber.
         view->setSubscriber(this);
+
+        // Create view (UI).
         view->create();
 
+        // Init model data.
+        model->m_ecg_series = lv_chart_add_series(view->m_ecg_chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
+
         // Setup ecg timer.
-        state->ecg_timer = lv_timer_create(ecg_demo_data_timer_handler, 500, NULL);
+        model->m_ecg_timer = lv_timer_create(ecg_demo_data_timer_handler, 200, this);
+        lv_timer_pause(model->m_ecg_timer);
+    }
+
+    // ECG demo data timer handler, generates demo data as set time interval.
+    void EcgPresenter::ecg_demo_data_timer_handler(lv_timer_t *timer)
+    {
+        // Cast pointer as ecg presenter object.
+        void* data = timer->user_data;
+        EcgPresenter* presenter_ptr = static_cast<EcgPresenter *>(data);
+
+        std::cout << "ECG demo running ...\n\r";
+        lv_chart_set_next_value(presenter_ptr->view->m_ecg_chart, presenter_ptr->model->m_ecg_series, lv_rand(5, 50));
+        lv_chart_refresh(presenter_ptr->view->m_ecg_chart);
     }
 
     void EcgPresenter::notifyPresenter(const IBaseNotificationEvent* p)
     {
-        // Enable/ disable ecg dema data timer.
-        if(p->notificationType == StartStopButtonPressed) {
-            state->ecg_demo_enabled = !state->ecg_demo_enabled;
-            std::cout << "Ecg enabled: " << state->ecg_demo_enabled << std::endl;
+        // Enable/ disable ecg demo data timer.
+        switch(p->notificationType)
+        {
+            // Start / Stop button pressed.
+            case StartStopButtonPressed:
+                model->m_ecg_demo_enabled = !model->m_ecg_demo_enabled;
+                std::cout << "Ecg enabled: " << model->m_ecg_demo_enabled << std::endl;
 
-            if(state->ecg_demo_enabled) {
-                lv_timer_resume(state->ecg_timer);
-            }else{
-                lv_timer_pause(state->ecg_timer);
-            }
+                if(model->m_ecg_demo_enabled) {
+                    lv_timer_resume(model->m_ecg_timer);
+                }else{
+                    lv_timer_pause(model->m_ecg_timer);
+                }
+
+
+            default:
+                break;
         }
+
     }
 
 }

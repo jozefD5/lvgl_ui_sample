@@ -5,7 +5,7 @@ namespace LvUi {
 
     // Constructor.
     EcgModel::EcgModel(void) {
-        ecg_demo_enabled = false;
+        m_ecg_demo_enabled = false;
     }
 
 

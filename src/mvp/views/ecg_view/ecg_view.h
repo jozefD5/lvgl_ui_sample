@@ -19,14 +19,14 @@
 namespace LvUi {
 
     class EcgView : public IBaseView {
-        private:
+        // TODO, set as private.
+        public:
             int32_t m_view_width;                           // View / container's width in pixels
             int32_t m_view_height;                          // View / container's height in pixels
             int32_t m_container_col_dsc[4];                 // Container columns.
             int32_t m_container_row_dsc[3];                 // Container rows.
             lv_obj_t *m_container;                          // Container.
             lv_obj_t *m_ecg_chart;                          // ECG chart.
-            lv_chart_series_t *m_ecg_series;                // ECG data series.
             lv_obj_t *control_btn;                          // Enable / disable button.
 
         private:
