@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include <functional>
 #include "ecg_presenter.h"
 #include "views/ecg_view/ecg_view.h"
@@ -19,7 +20,7 @@ namespace LvUi {
         model->m_ecg_series = lv_chart_add_series(view->m_ecg_chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
 
         // Setup ecg timer.
-        model->m_ecg_timer = lv_timer_create(ecg_demo_data_timer_handler, 200, this);
+        model->m_ecg_timer = lv_timer_create(ecg_demo_data_timer_handler, 100, this);
         lv_timer_pause(model->m_ecg_timer);
     }
 
@@ -32,8 +33,7 @@ namespace LvUi {
 
         // Update model.
         std::cout << "ECG demo running ...\n\r";
-        lv_chart_set_next_value(presenter_ptr->view->m_ecg_chart, presenter_ptr->model->m_ecg_series, lv_rand(5, 50));
-
+        lv_chart_set_next_value(presenter_ptr->view->m_ecg_chart, presenter_ptr->model->m_ecg_series, lv_rand(3, 50));
 
         // Notify view.
         NEcgSSButtonPressed eventNotification(StartStopButtonPressed);

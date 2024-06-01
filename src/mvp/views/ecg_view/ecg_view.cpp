@@ -71,6 +71,7 @@ namespace LvUi {
         m_ecg_chart = lv_chart_create(m_container);
         lv_obj_set_grid_cell(m_ecg_chart, LV_GRID_ALIGN_START, 0, 3, LV_GRID_ALIGN_STRETCH, 1, 1);
         lv_chart_set_range(m_ecg_chart, LV_CHART_AXIS_PRIMARY_Y, 0, 60);
+        lv_chart_set_update_mode(m_ecg_chart, LV_CHART_UPDATE_MODE_SHIFT);
         lv_obj_set_style_radius(m_ecg_chart, 10, LV_PART_MAIN);
         lv_obj_set_style_border_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
         lv_obj_set_style_bg_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
