@@ -19,23 +19,47 @@
 namespace LvUi {
 
     class EcgView : public IBaseView {
-        private:
+        // TODO, set as private.
+        public:
+            int32_t m_view_width;                           // View / container's width in pixels
+            int32_t m_view_height;                          // View / container's height in pixels
             int32_t m_container_col_dsc[4];                 // Container columns.
             int32_t m_container_row_dsc[3];                 // Container rows.
             lv_obj_t *m_container;                          // Container.
             lv_obj_t *m_ecg_chart;                          // ECG chart.
-            lv_chart_series_t *m_ecg_series;                // ECG data series.
             lv_obj_t *control_btn;                          // Enable / disable button.
 
         private:
+            /*******************************************************************************
+             * @brief Static function used as call back for LVGL events.
+             ******************************************************************************/
+            static void button_event_callback(lv_event_t *e);
 
         public:
+            /*******************************************************************************
+             * @brief Construct a new Ecg View object
+             *
+             * @param t_view_w view width in pixels.
+             * @param t_view_h view height in pixels.
+             *
+             ******************************************************************************/
             EcgView(const int32_t t_view_w, const int32_t t_view_h);
             ~EcgView() = default;
 
-            void create(const int32_t t_view_w, const int32_t t_view_h);
+            /*******************************************************************************
+             * @brief Initiate UI.
+             ******************************************************************************/
+            void create(void);
 
-            void updateLabel1(std::string str);
+            /*******************************************************************************
+             * @brief Notify view of any change. This is used by presenter to notify view if
+             *        model was updated.
+             *
+             * @param p pointer to notification object.
+             *
+             ******************************************************************************/
+            void notifyView(const IBaseNotificationEvent* p) override;
+
     };
 
 }

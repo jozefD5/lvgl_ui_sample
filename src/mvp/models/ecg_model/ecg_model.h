@@ -1,22 +1,16 @@
 #pragma once
+#include "lvgl/lvgl.h"
+
 
 namespace LvUi {
 
     class EcgModel {
-        private:
-            int demo_value_1;
-            int demo_value_2;
-
         public:
-            EcgModel(int val1, int val2);
+            bool m_ecg_demo_enabled;
+            lv_timer_t *m_ecg_timer;
+            lv_chart_series_t *m_ecg_series;
+        public:
+            EcgModel(void);
 
-            void setValue1(int val1);
-
-            void setValue2(int val2);
-
-            int getValue1();
-
-            int getValue2();
     };
-
 }
