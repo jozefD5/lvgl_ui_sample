@@ -3,6 +3,7 @@
 #include <functional>
 #include "ecg_presenter.h"
 #include "views/ecg_view/ecg_view.h"
+#include "actions/ecg/ecg_events.h"
 
 
 namespace LvUi {
@@ -29,14 +30,24 @@ namespace LvUi {
         void* data = timer->user_data;
         EcgPresenter* presenter_ptr = static_cast<EcgPresenter *>(data);
 
+        // Update model.
         std::cout << "ECG demo running ...\n\r";
         lv_chart_set_next_value(presenter_ptr->view->m_ecg_chart, presenter_ptr->model->m_ecg_series, lv_rand(5, 50));
-        lv_chart_refresh(presenter_ptr->view->m_ecg_chart);
+
+
+        // Notify view.
+        NEcgSSButtonPressed eventNotification(StartStopButtonPressed);
+        presenter_ptr->view->notifyView(&eventNotification);
     }
 
+    /*******************************************************************************
+     * @brief Notify presenter of any UI changes.
+     *
+     * @param p pointer to notification object that holds and action specific data.
+     *
+     ******************************************************************************/
     void EcgPresenter::notifyPresenter(const IBaseNotificationEvent* p)
     {
-        // Enable/ disable ecg demo data timer.
         switch(p->notificationType)
         {
             // Start / Stop button pressed.

@@ -14,7 +14,6 @@ namespace LvUi {
 
     EcgView::EcgView(const int32_t t_view_w, const int32_t t_view_h): m_view_width(t_view_w), m_view_height(t_view_h) {}
 
-
     void EcgView::button_event_callback(lv_event_t *e)
     {
         // Cast pointer as presenter interface object pointer.
@@ -24,7 +23,6 @@ namespace LvUi {
         NEcgSSButtonPressed eventNotification(StartStopButtonPressed);
         presenter_ptr->notifyPresenter(&eventNotification);
     }
-
 
     void EcgView::create(void)
     {
@@ -80,6 +78,15 @@ namespace LvUi {
 
     void LvUi::EcgView::notifyView(const IBaseNotificationEvent *p)
     {
+        switch (p->notificationType)
+        {
+        case StartStopButtonPressed:
+            lv_chart_refresh(m_ecg_chart);
+            break;
+
+        default:
+            break;
+        }
 
     }
 }
