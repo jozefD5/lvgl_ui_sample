@@ -24,13 +24,15 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE LV_CONF_INCLUDE_SIMPLE)
 set(LV_CONF_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lv_conf.h CACHE STRING "" FORCE)
 
 add_subdirectory(lvgl)
-add_subdirectory(${CMAKE_SOURCE_DIR}/src/mvp)
+add_subdirectory(${CMAKE_SOURCE_DIR}/mvp)
+add_subdirectory(${CMAKE_SOURCE_DIR}/ui)
 target_link_libraries(
     ${PROJECT_NAME}
     ${SDL2_LIBRARIES}
     lvgl lvgl::thorvg
     m pthread
-    mpv
+    mpv_base
+    ui_module
 )
 
 

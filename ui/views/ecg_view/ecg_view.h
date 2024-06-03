@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <vector>
 #include "lvgl/lvgl.h"
-#include "interfaces/base_view/i_base_view.h"
+#include "mvp/interfaces/i_mvp_base.h"
 
 // TODO, move general style to style header.
 // Use 100px for header.
@@ -18,7 +18,7 @@
 
 namespace LvUi {
 
-    class EcgView : public IBaseView {
+    class EcgView : public BaseMvp::IBaseView {
         // TODO, set as private.
         public:
             int32_t m_view_width;                           // View / container's width in pixels
@@ -58,7 +58,7 @@ namespace LvUi {
              * @param p pointer to notification object.
              *
              ******************************************************************************/
-            void notifyView(const IBaseNotificationEvent* p) override;
+            void notifyView(const BaseMvp::IBaseNotificationEvent* p) override;
 
     };
 

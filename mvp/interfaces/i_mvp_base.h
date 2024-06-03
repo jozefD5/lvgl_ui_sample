@@ -1,6 +1,6 @@
 #pragma once
 
-namespace LvUi {
+namespace BaseMvp {
 
     /*******************************************************************************
      * @brief Notification event interface, represents notification view can send to
@@ -8,7 +8,7 @@ namespace LvUi {
      ******************************************************************************/
     class IBaseNotificationEvent {
         public:
-            // Notification type specific to view, used by presenter to distinguishe
+            // Notification type specific to view, used by presenter to distinguished
             // between notifications. e.g. button press = 0 and button hold = 1.
             int notificationType;
 

@@ -17,7 +17,7 @@ namespace LvUi {
      * @brief ECG view presenter. Handles all required business logic associated
      *        with ECG view and ECG data.
      ******************************************************************************/
-    class EcgPresenter : public IBasePresenter {
+    class EcgPresenter : public BaseMvp::IBasePresenter {
         private:
             EcgView* view;              // View (UI)
             EcgModel* model;            // Data model for this view.
@@ -47,7 +47,7 @@ namespace LvUi {
              *          data if required, such as text .
              *
              ******************************************************************************/
-            void notifyPresenter(const IBaseNotificationEvent* p) override;
+            void notifyPresenter(const BaseMvp::IBaseNotificationEvent* p) override;
 
 
 

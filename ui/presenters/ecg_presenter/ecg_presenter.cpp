@@ -46,7 +46,7 @@ namespace LvUi {
      * @param p pointer to notification object that holds and action specific data.
      *
      ******************************************************************************/
-    void EcgPresenter::notifyPresenter(const IBaseNotificationEvent* p)
+    void EcgPresenter::notifyPresenter(const BaseMvp::IBaseNotificationEvent* p)
     {
         switch(p->notificationType)
         {

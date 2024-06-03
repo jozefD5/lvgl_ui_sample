@@ -1,7 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <functional>
-#include "interfaces/base_view/i_base_view.h"
+#include "mvp/interfaces/i_mvp_base.h"
 #include "actions/ecg/ecg_events.h"
 #include "presenters/ecg_presenter/ecg_presenter.h"
 #include "ecg_view.h"
@@ -18,7 +18,7 @@ namespace LvUi {
     {
         // Cast pointer as presenter interface object pointer.
         void* void_presenter_ptr = lv_event_get_user_data(e);
-        IBasePresenter* presenter_ptr = static_cast<IBasePresenter *>(void_presenter_ptr);
+        BaseMvp::IBasePresenter* presenter_ptr = static_cast<BaseMvp::IBasePresenter *>(void_presenter_ptr);
 
         NEcgSSButtonPressed eventNotification(StartStopButtonPressed);
         presenter_ptr->notifyPresenter(&eventNotification);
@@ -77,7 +77,7 @@ namespace LvUi {
         lv_obj_set_style_bg_color(m_ecg_chart, lv_color_hex(CHART_BACKGROUND_COLOR), LV_PART_MAIN);
     }
 
-    void LvUi::EcgView::notifyView(const IBaseNotificationEvent *p)
+    void LvUi::EcgView::notifyView(const BaseMvp::IBaseNotificationEvent *p)
     {
         switch (p->notificationType)
         {
