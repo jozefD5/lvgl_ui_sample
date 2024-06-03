@@ -8,3 +8,7 @@
 void LvUi::MainTabView::notifyView(const BaseMvp::IBaseNotificationEvent *p)
 {
 }
+
+void LvUi::MainTabView::create(void)
+{
+}

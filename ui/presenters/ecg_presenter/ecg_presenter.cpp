@@ -17,7 +17,7 @@ namespace LvUi {
         view->create(ecgModel->m_view_width, ecgModel->m_view_height);
 
         // Init model data.
-        model->m_ecg_series = lv_chart_add_series(view->m_ecg_chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
+        model->m_ecg_series = lv_chart_add_series(view->getChartPtr(), lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
 
         // Setup ecg timer.
         model->m_ecg_timer = lv_timer_create(ecg_demo_data_timer_handler, 100, this);
@@ -33,7 +33,7 @@ namespace LvUi {
 
         // Update model.
         std::cout << "ECG demo running ...\n\r";
-        lv_chart_set_next_value(presenter_ptr->view->m_ecg_chart, presenter_ptr->model->m_ecg_series, lv_rand(3, 50));
+        lv_chart_set_next_value(presenter_ptr->view->getChartPtr(), presenter_ptr->model->m_ecg_series, lv_rand(3, 50));
 
         // Notify view.
         NEcgSSButtonPressed eventNotification(StartStopButtonPressed);

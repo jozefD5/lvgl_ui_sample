@@ -20,7 +20,7 @@ namespace LvUi {
 
     class EcgView : public BaseMvp::IBaseView {
         // TODO, set as private.
-        public:
+        private:
             int32_t m_container_col_dsc[4];                 // Container columns.
             int32_t m_container_row_dsc[3];                 // Container rows.
             lv_obj_t *m_container;                          // Container.
@@ -54,6 +54,14 @@ namespace LvUi {
              *
              ******************************************************************************/
             void notifyView(const BaseMvp::IBaseNotificationEvent* p) override;
+
+            /*******************************************************************************
+             * @brief Get the Chat Ptr object Get pointer to chart LVGL object.
+             *
+             *
+             * @return lv_obj_t pointer to LVGL object.
+             ******************************************************************************/
+            lv_obj_t* getChartPtr(void);
 
     };
 

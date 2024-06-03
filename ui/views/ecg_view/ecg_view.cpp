@@ -14,6 +14,12 @@ namespace LvUi {
 
     EcgView::EcgView(void) {}
 
+    /*******************************************************************************
+     * @brief Static call back required for button event.
+     *
+     * @param e event.
+     *
+     ******************************************************************************/
     void EcgView::button_event_callback(lv_event_t *e)
     {
         // Cast pointer as presenter interface object pointer.
@@ -24,6 +30,13 @@ namespace LvUi {
         presenter_ptr->notifyPresenter(&eventNotification);
     }
 
+    /*******************************************************************************
+     * @brief Create view.
+     *
+     * @param t_view_w view width in pixels.
+     * @param t_view_h view height in pixels.
+     *
+     ******************************************************************************/
     void EcgView::create(const int32_t t_view_w, const int32_t t_view_h)
     {
         // Setup main container (grid) size and layout.
@@ -90,4 +103,10 @@ namespace LvUi {
         }
 
     }
+
+    lv_obj_t* LvUi::EcgView::getChartPtr(void)
+    {
+        return m_ecg_chart;
+    }
+
 }
