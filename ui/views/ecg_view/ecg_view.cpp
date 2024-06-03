@@ -1,7 +1,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <functional>
-#include "mvp/interfaces/i_mvp_base.h"
+#include "mvp/interfaces/i_base_mvp.h"
 #include "actions/ecg/ecg_events.h"
 #include "presenters/ecg_presenter/ecg_presenter.h"
 #include "ecg_view.h"
@@ -12,7 +12,7 @@
 
 namespace LvUi {
 
-    EcgView::EcgView(const int32_t t_view_w, const int32_t t_view_h): m_view_width(t_view_w), m_view_height(t_view_h) {}
+    EcgView::EcgView(void) {}
 
     void EcgView::button_event_callback(lv_event_t *e)
     {
@@ -24,11 +24,11 @@ namespace LvUi {
         presenter_ptr->notifyPresenter(&eventNotification);
     }
 
-    void EcgView::create(void)
+    void EcgView::create(const int32_t t_view_w, const int32_t t_view_h)
     {
         // Setup main container (grid) size and layout.
-        auto container_width = m_view_width - (DEFAULT_PADING_PX * 2);
-        auto container_height = m_view_height - (DEFAULT_PADING_PX * 2);
+        auto container_width = t_view_w - (DEFAULT_PADING_PX * 2);
+        auto container_height = t_view_h - (DEFAULT_PADING_PX * 2);
 
         m_container_col_dsc[0] = LV_GRID_FR(1);
         m_container_col_dsc[1] = LV_GRID_FR(1);

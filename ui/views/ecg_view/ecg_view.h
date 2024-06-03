@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <vector>
 #include "lvgl/lvgl.h"
-#include "mvp/interfaces/i_mvp_base.h"
+#include "mvp/interfaces/i_base_mvp.h"
 
 // TODO, move general style to style header.
 // Use 100px for header.
@@ -21,8 +21,6 @@ namespace LvUi {
     class EcgView : public BaseMvp::IBaseView {
         // TODO, set as private.
         public:
-            int32_t m_view_width;                           // View / container's width in pixels
-            int32_t m_view_height;                          // View / container's height in pixels
             int32_t m_container_col_dsc[4];                 // Container columns.
             int32_t m_container_row_dsc[3];                 // Container rows.
             lv_obj_t *m_container;                          // Container.
@@ -36,20 +34,17 @@ namespace LvUi {
             static void button_event_callback(lv_event_t *e);
 
         public:
+            EcgView();
+            ~EcgView() = default;
+
             /*******************************************************************************
-             * @brief Construct a new Ecg View object
+             * @brief Initiate UI.
              *
              * @param t_view_w view width in pixels.
              * @param t_view_h view height in pixels.
              *
              ******************************************************************************/
-            EcgView(const int32_t t_view_w, const int32_t t_view_h);
-            ~EcgView() = default;
-
-            /*******************************************************************************
-             * @brief Initiate UI.
-             ******************************************************************************/
-            void create(void);
+            void create(const int32_t t_view_w, const int32_t t_view_h);
 
             /*******************************************************************************
              * @brief Notify view of any change. This is used by presenter to notify view if

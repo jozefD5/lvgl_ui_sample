@@ -1,5 +1,5 @@
 #pragma once
-#include "mvp/interfaces/i_mvp_base.h"
+#include "mvp/interfaces/i_base_mvp.h"
 
 namespace LvUi {
     /*******************************************************************************

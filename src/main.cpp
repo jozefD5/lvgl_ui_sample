@@ -37,9 +37,8 @@ int main(int argc, char **argv) {
     lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
 
     // Main view.
-    LvUi::EcgView ecgView(SCREEN_SIZE_W, SCREEN_SIZE_H);
-    LvUi::EcgModel ecgModel;
-
+    LvUi::EcgModel ecgModel(SCREEN_SIZE_W, SCREEN_SIZE_H);
+    LvUi::EcgView ecgView;
     LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
 
     while(1) {

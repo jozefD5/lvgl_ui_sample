@@ -14,7 +14,7 @@ namespace LvUi {
         view->setSubscriber(this);
 
         // Create view (UI).
-        view->create();
+        view->create(ecgModel->m_view_width, ecgModel->m_view_height);
 
         // Init model data.
         model->m_ecg_series = lv_chart_add_series(view->m_ecg_chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
