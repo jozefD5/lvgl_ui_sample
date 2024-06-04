@@ -59,8 +59,8 @@ namespace LvUi {
         lv_obj_set_size(m_container, container_width, container_height);
         lv_obj_center(m_container);
         lv_obj_set_layout(m_container, LV_LAYOUT_GRID);
-        lv_obj_set_style_bg_color(m_container, lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
-        lv_obj_set_style_border_color(m_container, lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(m_container, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
+        lv_obj_set_style_border_color(m_container, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
         lv_obj_align(m_container, LV_ALIGN_CENTER, 0, 0);
 
 

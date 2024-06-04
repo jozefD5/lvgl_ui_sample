@@ -2,6 +2,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <vector>
+#include "main.h"
 #include "lvgl/lvgl.h"
 #include "mvp/interfaces/i_base_mvp.h"
 
@@ -11,7 +12,6 @@
 
 // Style. default
 #define DEFAULT_PADING_PX              10U
-#define BACKGROUN_COLOR                0x001d3d
 #define CHART_BACKGROUND_COLOR         0x003566
 
 

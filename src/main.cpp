@@ -4,6 +4,7 @@
 #include "lvgl/lvgl.h"
 #include "views/ecg_view/ecg_view.h"
 #include "presenters/ecg_presenter/ecg_presenter.h"
+#include "views/main_tab/main_tab_view.h"
 
 #define SCREEN_SIZE_W     1280
 #define SCREEN_SIZE_H     720
@@ -34,12 +35,16 @@ int main(int argc, char **argv) {
     hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
 
     // Main view background color.
-    lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
+    static lv_obj_t *main_active_screen = lv_screen_active();
+    lv_obj_set_style_bg_color(main_active_screen, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
 
-    // Main view.
-    LvUi::EcgModel ecgModel(SCREEN_SIZE_W, SCREEN_SIZE_H);
-    LvUi::EcgView ecgView;
-    LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
+    LvUi::MainTabView mainTabView;
+    mainTabView.create(main_active_screen);
+
+    // ECG view.
+    // LvUi::EcgModel ecgModel(SCREEN_SIZE_W, SCREEN_SIZE_H);
+    // LvUi::EcgView ecgView;
+    // LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
 
     while(1) {
       lv_timer_handler();
