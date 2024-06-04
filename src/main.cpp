@@ -5,6 +5,7 @@
 #include "views/ecg_view/ecg_view.h"
 #include "presenters/ecg_presenter/ecg_presenter.h"
 #include "views/main_tab/main_tab_view.h"
+#include "presenters/main_tab/main_tab_presenter.h"
 
 #define SCREEN_SIZE_W     1280
 #define SCREEN_SIZE_H     720
@@ -39,7 +40,7 @@ int main(int argc, char **argv) {
     lv_obj_set_style_bg_color(main_active_screen, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
 
     LvUi::MainTabView mainTabView;
-    mainTabView.create(main_active_screen);
+    LvUi::MainTabPresenter mainTabPresenter(&mainTabView, main_active_screen);
 
     // ECG view.
     // LvUi::EcgModel ecgModel(SCREEN_SIZE_W, SCREEN_SIZE_H);

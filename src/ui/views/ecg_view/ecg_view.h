@@ -17,9 +17,11 @@
 
 
 namespace LvUi {
-
+    /*******************************************************************************
+     * @brief ECG graph view.
+     *
+     ******************************************************************************/
     class EcgView : public BaseMvp::IBaseView {
-        // TODO, set as private.
         private:
             int32_t m_container_col_dsc[4];                 // Container columns.
             int32_t m_container_row_dsc[3];                 // Container rows.
