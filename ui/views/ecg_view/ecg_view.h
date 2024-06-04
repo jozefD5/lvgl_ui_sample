@@ -38,7 +38,7 @@ namespace LvUi {
             ~EcgView() = default;
 
             /*******************************************************************************
-             * @brief Initiate UI.
+             * @brief Construct UI.
              *
              * @param t_view_w view width in pixels.
              * @param t_view_h view height in pixels.
