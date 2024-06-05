@@ -40,7 +40,8 @@ int main(int argc, char **argv) {
     lv_obj_set_style_bg_color(main_active_screen, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
 
     LvUi::MainTabView mainTabView;
-    LvUi::MainTabPresenter mainTabPresenter(&mainTabView, main_active_screen);
+    LvUi::MainTabModel mainTabModel;
+    LvUi::MainTabPresenter mainTabPresenter(&mainTabView, &mainTabModel, main_active_screen);
 
     // ECG view.
     // LvUi::EcgModel ecgModel(SCREEN_SIZE_W, SCREEN_SIZE_H);

@@ -58,4 +58,24 @@ namespace BaseMvp {
             }
     };
 
+    /*******************************************************************************
+     * @brief Base model interface, needs to be used with every model.
+     ******************************************************************************/
+    class IBaseModel {
+        public:
+            // Presenter subscriber.
+            IBasePresenter* subscriber;
+
+            /*******************************************************************************
+             * @brief Set the Subscriber object
+             *
+             * @param ss pointer to subscriber
+             *
+             ******************************************************************************/
+            void setSubscriber(IBasePresenter* ss)
+            {
+                subscriber = ss;
+            }
+    };
+
 }

@@ -1,10 +1,15 @@
 #pragma once
+#include "mvp/interfaces/i_base_mvp.h"
 #include "lvgl/lvgl.h"
 
 
 namespace LvUi {
 
-    class EcgModel {
+    /*******************************************************************************
+     * @brief Ecg view data model, includes all data associated with ECG view.
+     *
+     ******************************************************************************/
+    class EcgModel : public BaseMvp::IBaseModel{
         public:
             int32_t m_view_width;                   // View / container's width in pixels
             int32_t m_view_height;                  // View / container's height in pixels

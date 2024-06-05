@@ -6,8 +6,9 @@
 
 namespace LvUi {
 
-    LvUi::MainTabPresenter::MainTabPresenter(MainTabView *view, lv_obj_t *parent_widget) : m_view(view)
+    LvUi::MainTabPresenter::MainTabPresenter(MainTabView* view, MainTabModel * model, lv_obj_t*parent_widget) : m_view(view), m_model(model)
     {
+        m_model->setSubscriber(this);
         m_view->setSubscriber(this);
         m_view->create(parent_widget);
     }
