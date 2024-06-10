@@ -6,6 +6,7 @@
 
 namespace BaseMvp {
 
+    // Subscriber.
     void IBaseSubscriber::setNotificationCallback(IBaseNotificationType type, std::function<void(const void*)>& callback) {
         m_callbacks_.insert({type.notificationType, callback});
     }
@@ -18,9 +19,28 @@ namespace BaseMvp {
         }
     }
 
-    void BaseMvp::IBasePublisher::subscribe(IBaseSubscriber *subscriber)
+
+    // Publisher.
+    void IBasePublisher::subscribe(std::shared_ptr<IBaseSubscriber> subscriber)
     {
-        m_subscribers_.push_back(std::weak_ptr<IBaseSubscriber>(subscriber));
+        m_subscribers_.push_back(subscriber);
+    }
+
+    void IBasePublisher::unsubscribe(std::shared_ptr<IBaseSubscriber> subscriber)
+    {
+        // TODO, implement.
+
+        // auto iter =
+        // if(iter != m_subscribers_.end()) {
+        //     m_subscribers_.erase(iter);
+        // }
+    }
+
+    void IBasePublisher::notify(IBaseNotificationType type)
+    {
+        for(const auto&ptr : m_subscribers_) {
+            ptr->onNotify(type);
+        }
     }
 
 }

@@ -43,9 +43,10 @@ namespace BaseMvp {
             void setNotificationCallback(IBaseNotificationType type, std::function<void(const void*)>& callback);
 
             /*******************************************************************************
-             * @brief Subscriber notification event receive method.
+             * @brief Subscriber notification event receive method. Call required callback
+             *        based on notification type.
              *
-             * @param notification
+             * @param notification notification object which includes notification type integer.
              *
              ******************************************************************************/
             void onNotify(IBaseNotificationType notification);
@@ -53,21 +54,39 @@ namespace BaseMvp {
 
 
     /*******************************************************************************
-     * @brief
+     * @brief Publisher interface, allows to notify all subscribers of specific events.
      *
      ******************************************************************************/
     class IBasePublisher {
         private:
             // List of subscriber.
-            std::vector<std::weak_ptr<IBaseSubscriber>> m_subscribers_;
+            std::vector<std::shared_ptr<IBaseSubscriber>> m_subscribers_;
 
         public:
             ~IBasePublisher() = default;
 
-            void subscribe(IBaseSubscriber *subscriber);
+            /*******************************************************************************
+             * @brief Add new subscriber.
+             *
+             * @param subscriber Subscriber to be added.
+             *
+             ******************************************************************************/
+            void subscribe(std::shared_ptr<IBaseSubscriber> subscriber);
 
-            void unsubscribe(IBaseSubscriber* subscriber);
+            /*******************************************************************************
+             * @brief Unsubscribe from publisher.
+             *
+             * @param subscriber subscriber to be removed.
+             *
+             ******************************************************************************/
+            void unsubscribe(std::shared_ptr<IBaseSubscriber> subscriber);
 
+            /*******************************************************************************
+             * @brief Notify all subscribers of new notification event.
+             *
+             * @param type notification type.
+             *
+             ******************************************************************************/
             void notify(IBaseNotificationType type);
     };
 
