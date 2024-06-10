@@ -7,6 +7,10 @@
 #include "views/main_tab/main_tab_view.h"
 #include "presenters/main_tab/main_tab_presenter.h"
 
+
+#include "mvp/interfaces/base_pub_sub.h"
+
+
 #define SCREEN_SIZE_W     1280
 #define SCREEN_SIZE_H     720
 
@@ -26,13 +30,15 @@ static lv_display_t * hal_init(int32_t w, int32_t h);
 
 
 int main(int argc, char **argv) {
-    (void)argc; /*Unused*/
-    (void)argv; /*Unused*/
+    (void)argc;
+    (void)argv;
 
-    /*Initialize LVGL*/
+    /*
+
+    // Initialize LVGL.
     lv_init();
 
-    /*Initialize the HAL (display, input devices, tick) for LVGL*/
+    // Initialize the HAL (display, input devices, tick) for LVGL.
     hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
 
     // Main view background color.
@@ -52,6 +58,40 @@ int main(int argc, char **argv) {
       lv_timer_handler();
       usleep(5 * 1000);
     }
+*/
+
+
+
+
+    std::function<void(const void*)> callb1 = [](const void*){
+      std::cout << "callback 1\n\r";
+    };
+
+    std::function<void(const void*)> callb2 = [](const void*){
+      std::cout << "callback 2\n\r";
+    };
+
+
+
+    BaseMvp::IBaseNotificationType notification1 = BaseMvp::IBaseNotificationType(0);
+    BaseMvp::IBaseNotificationType notification2 = BaseMvp::IBaseNotificationType(1);
+
+    BaseMvp::IBasePublisher publisher;
+
+
+    auto sub1 = std::make_shared<BaseMvp::IBaseSubscriber>();
+    sub1->setNotificationCallback(notification1, callb1);
+    publisher.subscribe(sub1);
+
+    auto sub2 = std::make_shared<BaseMvp::IBaseSubscriber>();
+    sub2->setNotificationCallback(notification2, callb2);
+    publisher.subscribe(sub2);
+
+
+
+    publisher.notify(notification2);
+    publisher.notify(notification1);
+
 
     return 0;
 }

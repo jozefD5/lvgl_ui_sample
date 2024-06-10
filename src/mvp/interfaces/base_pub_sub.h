@@ -60,7 +60,7 @@ namespace BaseMvp {
     class IBasePublisher {
         private:
             // List of subscriber.
-            std::vector<std::shared_ptr<IBaseSubscriber>> m_subscribers_;
+            std::vector<std::weak_ptr<IBaseSubscriber>> m_subscribers_;
 
         public:
             ~IBasePublisher() = default;
@@ -71,7 +71,7 @@ namespace BaseMvp {
              * @param subscriber Subscriber to be added.
              *
              ******************************************************************************/
-            void subscribe(std::shared_ptr<IBaseSubscriber> subscriber);
+            void subscribe(std::weak_ptr<IBaseSubscriber> subscriber);
 
             /*******************************************************************************
              * @brief Unsubscribe from publisher.
@@ -79,7 +79,7 @@ namespace BaseMvp {
              * @param subscriber subscriber to be removed.
              *
              ******************************************************************************/
-            void unsubscribe(std::shared_ptr<IBaseSubscriber> subscriber);
+            void unsubscribe(std::weak_ptr<IBaseSubscriber> subscriber);
 
             /*******************************************************************************
              * @brief Notify all subscribers of new notification event.

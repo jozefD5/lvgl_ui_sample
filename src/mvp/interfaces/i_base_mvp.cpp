@@ -21,12 +21,12 @@ namespace BaseMvp {
 
 
     // Publisher.
-    void IBasePublisher::subscribe(std::shared_ptr<IBaseSubscriber> subscriber)
+    void IBasePublisher::subscribe(std::weak_ptr<IBaseSubscriber> subscriber)
     {
         m_subscribers_.push_back(subscriber);
     }
 
-    void IBasePublisher::unsubscribe(std::shared_ptr<IBaseSubscriber> subscriber)
+    void IBasePublisher::unsubscribe(std::weak_ptr<IBaseSubscriber> subscriber)
     {
         // TODO, implement.
 
@@ -39,8 +39,9 @@ namespace BaseMvp {
     void IBasePublisher::notify(IBaseNotificationType type)
     {
         for(const auto&ptr : m_subscribers_) {
-            ptr->onNotify(type);
+            if(auto subscriber = ptr.lock()) {
+                subscriber->onNotify(type);
+            }
         }
     }
-
 }
