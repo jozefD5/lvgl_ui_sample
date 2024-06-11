@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
 */
 
 
-
+/*
 
     std::function<void(const void*)> callb1 = [](const void*){
       std::cout << "callback 1\n\r";
@@ -89,10 +89,12 @@ int main(int argc, char **argv) {
 
 
 
-    publisher.notify(notification2);
-    publisher.notify(notification1);
+    publisher.notifySubscribers(notification2);
+    publisher.notifySubscribers(notification1);
 
 
+
+*/
     return 0;
 }
 

@@ -6,14 +6,18 @@
 
 namespace BaseMvp {
 
+    // Notification
+    IBaseNotificationType::IBaseNotificationType(int type): m_notification_type(type) {}
+
+
     // Subscriber.
-    void IBaseSubscriber::setNotificationCallback(IBaseNotificationType type, std::function<void(const void*)>& callback) {
-        m_callbacks_.insert({type.notificationType, callback});
+    void IBaseCoreSubscriber::setNotificationCallback(IBaseNotificationType type, std::function<void(const void*)>& callback) {
+        m_callbacks_.insert({type.m_notification_type, callback});
     }
 
-    void IBaseSubscriber::onNotify(IBaseNotificationType notification)
+    void IBaseCoreSubscriber::onNotify(IBaseNotificationType notification)
     {
-        auto element = m_callbacks_.find(notification.notificationType);
+        auto element = m_callbacks_.find(notification.m_notification_type);
         if(element != m_callbacks_.end()) {
             element->second(&notification);
         }
@@ -21,22 +25,26 @@ namespace BaseMvp {
 
 
     // Publisher.
-    void IBasePublisher::subscribe(std::weak_ptr<IBaseSubscriber> subscriber)
+    IBasePublisher::IBasePublisher()
+    {
+        /// SET SUB POINTER TO PUBLISHER
+    }
+
+    void IBasePublisher::subscribe(std::weak_ptr<IBaseCoreSubscriber> subscriber)
     {
         m_subscribers_.push_back(subscriber);
     }
 
-    void IBasePublisher::unsubscribe(std::weak_ptr<IBaseSubscriber> subscriber)
+    // TODO, implement.
+    void IBasePublisher::unsubscribe(std::weak_ptr<IBaseCoreSubscriber> subscriber)
     {
-        // TODO, implement.
-
         // auto iter =
         // if(iter != m_subscribers_.end()) {
         //     m_subscribers_.erase(iter);
         // }
     }
 
-    void IBasePublisher::notify(IBaseNotificationType type)
+    void IBasePublisher::notifySubscribers(IBaseNotificationType type)
     {
         for(const auto&ptr : m_subscribers_) {
             if(auto subscriber = ptr.lock()) {
