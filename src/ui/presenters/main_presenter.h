@@ -2,38 +2,11 @@
 #include "lvgl/lvgl.h"
 #include "mvp/interfaces/base_pub_sub.h"
 #include "models/main_model.h"
+#include "main_presenter_notifications.h"
 
 using namespace BaseMvp;
 
 namespace LvUi {
-
-    /*******************************************************************************
-     * @brief Notification to set ECG switch state.
-     *
-     ******************************************************************************/
-    class NEcgSetSwitchState : public IBaseNotificationType{
-        public:
-            int m_state;
-
-        NEcgSetSwitchState(int state): m_state(state) {
-            m_notification_type = 0;
-        }
-    };
-
-    /*******************************************************************************
-     * @brief Notification to set oxygen switch state.
-     *
-     ******************************************************************************/
-    class NOxygenSetSwitchState : public IBaseNotificationType{
-        public:
-            int m_state;
-
-        NOxygenSetSwitchState(int state): m_state(state) {
-            m_notification_type = 1;
-        }
-    };
-
-
 
     /*******************************************************************************
      * @brief Main application presenter, handles core application business logic.
@@ -62,7 +35,7 @@ namespace LvUi {
             void setOxygenDemoData(const bool enable);
 
             /*******************************************************************************
-             * @brief
+             * @brief ECG demo data generator.
              *
              * @param timer
              *
@@ -70,7 +43,7 @@ namespace LvUi {
             static void ecg_demo_data_timer_handler(lv_timer_t *timer);
 
             /*******************************************************************************
-             * @brief
+             * @brief Oxygen demo data generator.
              *
              * @param timer
              *
