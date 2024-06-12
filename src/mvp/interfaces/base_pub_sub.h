@@ -3,10 +3,9 @@
 #include <map>
 #include <functional>
 #include <memory>
-#include "i_base_mvp.h"
-
 
 namespace BaseMvp {
+
     /*******************************************************************************
      * @brief Notification event interface, represents notification
      *        subscriber can receive.
@@ -49,7 +48,6 @@ namespace BaseMvp {
              ******************************************************************************/
             void onNotify(IBaseNotificationType notification);
     };
-
 
     /*******************************************************************************
      * @brief Publisher interface, allows to notify all subscribers of specific events.
@@ -100,7 +98,6 @@ namespace BaseMvp {
              ******************************************************************************/
             virtual void* getModel(void) = 0;
     };
-
 
     /*******************************************************************************
      * @brief Subscriber, in addition to core subscriber this class also includes
