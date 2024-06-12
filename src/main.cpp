@@ -6,6 +6,7 @@
 #include "ui/models/main_model.h"
 #include "ui/presenters/main_presenter.h"
 #include "ui/views/main_tab/main_tab_view.h"
+#include "ui/views/menu_view/menu_view.h"
 #include "ui/views/ecg_view/ecg_view.h"
 #include "ui/views/oxygen_view/oxygen_view.h"
 
@@ -45,12 +46,19 @@ int main(int argc, char **argv) {
     lv_disp_set_theme(dispp, theme);
     static lv_obj_t* active_screen = lv_obj_create(NULL);
 
-    // Main tab.
+    // Initialize model and publisher.
     LvUi::MainModel mainModel;
     LvUi::MainPresenter mainPresenter(&mainModel);
+
+    // Main tab view.
     auto mainTabiew = std::make_shared<LvUi::MainTabView>(&mainPresenter);
     mainPresenter.subscribe(mainTabiew);
     mainTabiew->init(active_screen);
+
+    // Menu tab.
+    auto menuTab = std::make_shared<LvUi::MenuView>(&mainPresenter);
+    mainPresenter.subscribe(menuTab);
+    menuTab->init();
 
     // ECG tab.
     auto ecgTab = std::make_shared<LvUi::EcgView>(&mainPresenter);
@@ -61,10 +69,6 @@ int main(int argc, char **argv) {
     auto oxygenTab = std::make_shared<LvUi::OxygenView>(&mainPresenter);
     mainPresenter.subscribe(oxygenTab);
     oxygenTab->init();
-
-
-
-
 
     lv_disp_load_scr(active_screen);
 

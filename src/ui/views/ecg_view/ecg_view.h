@@ -7,6 +7,7 @@
 using namespace BaseMvp;
 
 namespace LvUi {
+
     /*******************************************************************************
      * @brief ECG view, displays ECG data.
      *

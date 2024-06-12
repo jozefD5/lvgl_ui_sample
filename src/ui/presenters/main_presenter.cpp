@@ -3,7 +3,6 @@
 #include "lvgl/lvgl.h"
 #include "mvp/interfaces/base_pub_sub.h"
 
-
 namespace LvUi {
 
     MainPresenter::MainPresenter(MainModel *dataModel) : m_dataModel_(dataModel) {}

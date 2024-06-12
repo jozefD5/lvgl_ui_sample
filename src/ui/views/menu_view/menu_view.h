@@ -8,28 +8,28 @@ using namespace BaseMvp;
 namespace LvUi {
 
     /*******************************************************************************
-     * @brief Oxygen data view.
+     * @brief Main menu tab, displays ecg and oxygen data.
      *
      ******************************************************************************/
-    class OxygenView : public IBaseSubscriber {
+    class MenuView : public IBaseSubscriber {
         public:
             // Pointer to presenter's model (data).
             MainModel *m_model_;
 
         public:
             /*******************************************************************************
-             * @brief Construct a new Oxygen View object
+             * @brief Construct a new Menu View object
              *
              * @param publisher pointer to publisher for bi-directional communication.
              *
              ******************************************************************************/
-            OxygenView(IBasePublisher *publisher);
+            MenuView(IBasePublisher *publisher);
 
             /*******************************************************************************
              * @brief Initialise core components and create UI.
              *
              ******************************************************************************/
             void init(void);
-    };
 
+    };
 }

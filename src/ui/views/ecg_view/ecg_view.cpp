@@ -2,6 +2,7 @@
 #include "ecg_view.h"
 
 namespace LvUi {
+
     EcgView::EcgView(IBasePublisher *publisher)
     {
         m_publisher = publisher;

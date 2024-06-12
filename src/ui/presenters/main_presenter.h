@@ -6,11 +6,22 @@
 using namespace BaseMvp;
 
 namespace LvUi {
+
+    /*******************************************************************************
+     * @brief Main application presenter, handles core application business logic.
+     *
+     ******************************************************************************/
     class MainPresenter : public IBasePublisher{
         public:
             MainModel *m_dataModel_;
 
         public:
+            /*******************************************************************************
+             * @brief Construct a new Main Presenter object
+             *
+             * @param dataModel pointer to data model that holds presenter's data.
+             *
+             ******************************************************************************/
             MainPresenter(MainModel *dataModel);
 
             void onSubscriberData(IBaseNotificationType type) override;
