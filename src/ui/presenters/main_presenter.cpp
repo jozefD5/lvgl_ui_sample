@@ -20,11 +20,17 @@ namespace LvUi {
         MainPresenter* presenter_ptr = static_cast<MainPresenter *>(data_ptr);
 
         // Update model.
+        lv_obj_t *chart_main = presenter_ptr->m_dataModel_->m_main_ecg_chart;
+        lv_chart_series_t *series_main = presenter_ptr->m_dataModel_->m_main_ecg_chart_series;
+
         lv_obj_t *chart = presenter_ptr->m_dataModel_->m_ecg_chart;
         lv_chart_series_t *series = presenter_ptr->m_dataModel_->m_ecg_chart_series;
 
-        if(chart != NULL && series != NULL) {
-            lv_chart_set_next_value(chart, series, lv_rand(3, 50));
+        if(chart != NULL && series != NULL &&
+           chart_main != NULL && series_main != NULL) {
+            uint32_t val = lv_rand(3, 50);
+            lv_chart_set_next_value(chart, series, val);
+            lv_chart_set_next_value(chart_main, series_main, val);
         }
     }
 
@@ -34,11 +40,17 @@ namespace LvUi {
         MainPresenter* presenter_ptr = static_cast<MainPresenter *>(data_ptr);
 
         // Update model.
+        lv_obj_t *chart_main = presenter_ptr->m_dataModel_->m_main_oxygen_chart;
+        lv_chart_series_t *series_main = presenter_ptr->m_dataModel_->m_main_oxygen_chart_series;
+
         lv_obj_t *chart = presenter_ptr->m_dataModel_->m_oxygen_chart;
         lv_chart_series_t *series = presenter_ptr->m_dataModel_->m_oxygen_chart_series;
 
-        if(chart != NULL && series != NULL) {
-            lv_chart_set_next_value(chart, series, lv_rand(3, 50));
+        if(chart != NULL && series != NULL &&
+           chart_main != NULL && series_main != NULL) {
+            uint32_t val = lv_rand(3, 50);
+            lv_chart_set_next_value(chart, series, val);
+            lv_chart_set_next_value(chart_main, series_main, val);
         }
     }
 

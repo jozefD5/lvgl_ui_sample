@@ -16,6 +16,12 @@ namespace LvUi {
             lv_obj_t *m_ecg_tab;
             lv_obj_t *m_oxygen_tab;
 
+            // Main menu data
+            lv_obj_t *m_main_ecg_chart;
+            lv_obj_t *m_main_oxygen_chart;
+            lv_chart_series_t *m_main_ecg_chart_series;
+            lv_chart_series_t *m_main_oxygen_chart_series;
+
             // ECG data.
             lv_timer_t *m_ecg_data_timer;
             lv_obj_t *m_ecg_chart;
@@ -25,5 +31,7 @@ namespace LvUi {
             lv_timer_t *m_oxygen_data_timer;
             lv_obj_t *m_oxygen_chart;
             lv_chart_series_t *m_oxygen_chart_series;
+
+
     };
 }
