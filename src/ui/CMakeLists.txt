@@ -6,10 +6,10 @@ file(GLOB_RECURSE mpv_source_list
 )
 
 
-add_library(mpv_base STATIC
+add_library(ui_module STATIC
     ${mpv_source_list}
 )
 
-target_include_directories(mpv_base PUBLIC
+target_include_directories(ui_module PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
 )

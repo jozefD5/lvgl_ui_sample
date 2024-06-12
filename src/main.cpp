@@ -2,51 +2,117 @@
 #include <iostream>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
-#include "views/ecg_view/ecg_view.h"
-#include "presenters/ecg_presenter/ecg_presenter.h"
+#include "mvp/interfaces/base_pub_sub.h"
+#include "ui/models/main_model.h"
+#include "ui/presenters/main_presenter.h"
+#include "ui/views/main_tab/main_tab_view.h"
+#include "ui/views/menu_view/menu_view.h"
+#include "ui/views/ecg_view/ecg_view.h"
+#include "ui/views/oxygen_view/oxygen_view.h"
 
-#define SCREEN_SIZE_W     1280
-#define SCREEN_SIZE_H     720
+#define SCREEN_SIZE_W     800
+#define SCREEN_SIZE_H     480
+
+/**
+ * TODO, add styling to specific class.
+ */
 
 
 /*******************************************************************************
- * Function prototype
+ * Function prototypes
  ******************************************************************************/
 static lv_display_t * hal_init(int32_t w, int32_t h);
-
-
-/*******************************************************************************
- * Private Static variables
- ******************************************************************************/
-
 
 
 
 
 int main(int argc, char **argv) {
-    (void)argc; /*Unused*/
-    (void)argv; /*Unused*/
+    (void)argc;
+    (void)argv;
 
-    /*Initialize LVGL*/
+    // Initialize LVGL.
     lv_init();
 
-    /*Initialize the HAL (display, input devices, tick) for LVGL*/
+    // Initialize the HAL (display, input devices, tick) for LVGL.
     hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
 
-    // Main view background color.
-    lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
+    lv_disp_t * dispp = lv_display_get_default();
+    lv_theme_t * theme = lv_theme_default_init(dispp,
+                                               lv_palette_main(LV_PALETTE_BLUE),
+                                               lv_palette_main(LV_PALETTE_RED),
+                                               false,
+                                               LV_FONT_DEFAULT);
 
-    // Main view.
-    LvUi::EcgView ecgView(SCREEN_SIZE_W, SCREEN_SIZE_H);
-    LvUi::EcgModel ecgModel;
+    lv_disp_set_theme(dispp, theme);
+    static lv_obj_t* active_screen = lv_obj_create(NULL);
 
-    LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
+    // Initialize model and publisher.
+    LvUi::MainModel mainModel;
+    LvUi::MainPresenter mainPresenter(&mainModel);
+
+    // Main tab view.
+    auto mainTabiew = std::make_shared<LvUi::MainTabView>(&mainPresenter);
+    mainPresenter.subscribe(mainTabiew);
+    mainTabiew->init(active_screen);
+
+    // Menu tab.
+    auto menuTab = std::make_shared<LvUi::MenuView>(&mainPresenter);
+    mainPresenter.subscribe(menuTab);
+    menuTab->init();
+
+    // ECG tab.
+    auto ecgTab = std::make_shared<LvUi::EcgView>(&mainPresenter);
+    mainPresenter.subscribe(ecgTab);
+    ecgTab->init();
+
+    // Oxygen tab view.
+    auto oxygenTab = std::make_shared<LvUi::OxygenView>(&mainPresenter);
+    mainPresenter.subscribe(oxygenTab);
+    oxygenTab->init();
+
+    lv_disp_load_scr(active_screen);
 
     while(1) {
       lv_timer_handler();
       usleep(5 * 1000);
     }
 
+
+
+/*
+
+    std::function<void(const void*)> callb1 = [](const void*){
+      std::cout << "callback 1\n\r";
+    };
+
+    std::function<void(const void*)> callb2 = [](const void*){
+      std::cout << "callback 2\n\r";
+    };
+
+
+
+    BaseMvp::IBaseNotificationType notification1 = BaseMvp::IBaseNotificationType(0);
+    BaseMvp::IBaseNotificationType notification2 = BaseMvp::IBaseNotificationType(1);
+
+    BaseMvp::IBasePublisher publisher;
+
+
+    auto sub1 = std::make_shared<BaseMvp::IBaseSubscriber>();
+    sub1->setNotificationCallback(notification1, callb1);
+    publisher.subscribe(sub1);
+
+    auto sub2 = std::make_shared<BaseMvp::IBaseSubscriber>();
+    sub2->setNotificationCallback(notification2, callb2);
+    publisher.subscribe(sub2);
+
+
+
+    publisher.notifySubscribers(notification2);
+    publisher.notifySubscribers(notification1);
+
+
+
+*/
     return 0;
 }
 

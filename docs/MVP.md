@@ -6,4 +6,4 @@ MVP decouples view(UI) and business logic into two losley coupled software parts
 * Presenter acts as middleman, it darects data from module to view, and also updates module's fields if changes are capured via UI.
 
 ## Folder structure
-MVP Base interface provides 3 main interfaces, `IBaseNotificationEvent`, `IBasePresenter` and `IBaseView`.
+MVP Base interface provides 3 main interfaces, `BaseMvp::IBaseNotificationEvent`, `BaseMvp::IBasePresenter` and `BaseMvp::IBaseView`.
