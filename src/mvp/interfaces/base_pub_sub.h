@@ -31,8 +31,6 @@ namespace BaseMvp {
             std::map<int, std::function<void(const void*)>> m_callbacks_;
 
         public:
-            ~IBaseCoreSubscriber() = default;
-
             /*******************************************************************************
              * @brief Set the Notification Callback object
              *
@@ -63,10 +61,6 @@ namespace BaseMvp {
             std::vector<std::weak_ptr<IBaseCoreSubscriber>> m_subscribers_;
 
         public:
-            IBasePublisher();
-
-            ~IBasePublisher() = default;
-
             /*******************************************************************************
              * @brief Add new subscriber.
              *
@@ -98,6 +92,13 @@ namespace BaseMvp {
              *
              ******************************************************************************/
             virtual void onSubscriberData(IBaseNotificationType type) = 0;
+
+            /*******************************************************************************
+             * @brief Get the Model object.
+             *
+             * @return void* return pointer to model (data).
+             ******************************************************************************/
+            virtual void* getModel(void) = 0;
     };
 
 

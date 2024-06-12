@@ -2,14 +2,10 @@
 #include <iostream>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
-#include "views/ecg_view/ecg_view.h"
-#include "presenters/ecg_presenter/ecg_presenter.h"
-#include "views/main_tab/main_tab_view.h"
-#include "presenters/main_tab/main_tab_presenter.h"
-
-
 #include "mvp/interfaces/base_pub_sub.h"
-
+#include "ui/views/main_tab/main_tab_view.h"
+#include "ui/models/main_model.h"
+#include "ui/presenter/main_presenter.h"
 
 #define SCREEN_SIZE_W     1280
 #define SCREEN_SIZE_H     720
@@ -33,32 +29,49 @@ int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
 
-    /*
-
     // Initialize LVGL.
     lv_init();
 
     // Initialize the HAL (display, input devices, tick) for LVGL.
     hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
 
-    // Main view background color.
-    static lv_obj_t *main_active_screen = lv_screen_active();
-    lv_obj_set_style_bg_color(main_active_screen, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
+    // // Main view background color.
+    // static lv_obj_t *main_active_screen = lv_screen_active();
+    // lv_obj_set_style_bg_color(main_active_screen, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
 
-    LvUi::MainTabView mainTabView;
-    LvUi::MainTabModel mainTabModel;
-    LvUi::MainTabPresenter mainTabPresenter(&mainTabView, &mainTabModel, main_active_screen);
+    lv_disp_t * dispp = lv_display_get_default();
+    lv_theme_t * theme = lv_theme_default_init(dispp,
+                                               lv_palette_main(LV_PALETTE_BLUE),
+                                               lv_palette_main(LV_PALETTE_RED),
+                                               false,
+                                               LV_FONT_DEFAULT);
 
-    // ECG view.
-    // LvUi::EcgModel ecgModel(SCREEN_SIZE_W, SCREEN_SIZE_H);
-    // LvUi::EcgView ecgView;
-    // LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
+    lv_disp_set_theme(dispp, theme);
+
+    static lv_obj_t* active_screen = lv_obj_create(NULL);
+
+
+    // Main tab.
+    LvUi::MainModel mainModel;
+    LvUi::MainPresenter mainPresenter(&mainModel);
+    auto mainTabiew = std::make_shared<LvUi::MainTabView>(&mainPresenter);
+    mainPresenter.subscribe(mainTabiew);
+    mainTabiew->init(active_screen);
+
+
+
+
+
+
+
+
+    lv_disp_load_scr(active_screen);
 
     while(1) {
       lv_timer_handler();
       usleep(5 * 1000);
     }
-*/
+
 
 
 /*

@@ -1,52 +1,33 @@
 #include <iostream>
 #include "main_tab_view.h"
-#include "main.h"
-#include "lvgl/lvgl.h"
-#include "mvp/interfaces/i_base_mvp.h"
 
 
 namespace LvUi {
-
-    void MainTabView::create(lv_obj_t *parent_widget)
+    MainTabView::MainTabView(IBasePublisher *publisher)
     {
-        // Create tab view.
-        m_tab_view = lv_tabview_create(parent_widget);
-        lv_tabview_set_tab_bar_position(m_tab_view, LV_DIR_BOTTOM);
-        lv_tabview_set_tab_bar_size(m_tab_view, 50);
-
-        // Add tabs.
-        m_tab_main_menu = lv_tabview_add_tab(m_tab_view, "Main Menu");
-        m_tab_ecg = lv_tabview_add_tab(m_tab_view, "ECG");
-        m_tab_oxygen = lv_tabview_add_tab(m_tab_view, "Oxygen");
-
-        // Set style.
-        lv_obj_set_style_bg_color(m_tab_view, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
-        lv_obj_set_style_border_color(m_tab_view, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
-
-        lv_obj_t * tab_buttons = lv_tabview_get_tab_bar(m_tab_view);
-        lv_obj_set_style_bg_color(tab_buttons, lv_color_hex(MAIN_PRIMARY_COLOR), 0);
-        lv_obj_set_style_text_color(tab_buttons, lv_color_hex(MAIN_NAVIGATION_BTN_TXT_COLOR), 0);
-        lv_obj_set_style_border_side(tab_buttons, LV_BORDER_SIDE_FULL, LV_STATE_CHECKED | LV_STATE_FOCUSED);
-        lv_obj_set_style_border_color(tab_buttons, lv_color_hex(0xfafbfc), LV_STATE_CHECKED | LV_STATE_FOCUSED);
+        m_publisher = publisher;
+        m_model_ = static_cast<MainModel *>(m_publisher->getModel());
     }
 
-    lv_obj_t *LvUi::MainTabView::getMainTab(void)
+    void MainTabView::init(lv_obj_t *active_screen)
     {
-        return this->m_tab_main_menu;
-    }
+        // Set tab view position and style.
+        lv_obj_t* m_main_tab_view = lv_tabview_create(active_screen);
+        lv_tabview_set_tab_bar_position(m_main_tab_view, LV_DIR_BOTTOM);
+        lv_tabview_set_tab_bar_size(m_main_tab_view, 50);
+        lv_obj_set_width(m_main_tab_view, lv_pct(100));
+        lv_obj_set_height(m_main_tab_view, lv_pct(100));
+        lv_obj_set_align(m_main_tab_view, LV_ALIGN_CENTER);
+        lv_obj_remove_flag(m_main_tab_view, LV_OBJ_FLAG_SCROLLABLE);
 
-    lv_obj_t *LvUi::MainTabView::getEcgTab(void)
-    {
-        return this->m_tab_ecg;
-    }
+        lv_obj_set_style_text_color(lv_tabview_get_tab_bar(m_main_tab_view), lv_color_hex(0xFFFDFD), LV_STATE_DEFAULT);
+        lv_obj_set_style_text_opa(lv_tabview_get_tab_bar(m_main_tab_view), 255, LV_STATE_DEFAULT);
+        lv_obj_set_style_bg_color(lv_tabview_get_tab_bar(m_main_tab_view), lv_color_hex(0x3B7D98), LV_STATE_DEFAULT);
+        lv_obj_set_style_bg_opa(lv_tabview_get_tab_bar(m_main_tab_view), 255, LV_STATE_DEFAULT);
 
-    lv_obj_t *LvUi::MainTabView::getOxygenTab(void)
-    {
-        return this->m_tab_oxygen;
+        // Setup tabs.
+        m_model_->m_main_tab = lv_tabview_add_tab(m_main_tab_view, "Main");
+        m_model_->m_ecg_tab = lv_tabview_add_tab(m_main_tab_view, "ECG");
+        m_model_->m_oxygen_tab = lv_tabview_add_tab(m_main_tab_view, "Oxygen");
     }
-
-    void MainTabView::notifyView(const BaseMvp::IBaseNotificationEvent *p)
-    {
-    }
-
 }

@@ -25,11 +25,6 @@ namespace BaseMvp {
 
 
     // Publisher.
-    IBasePublisher::IBasePublisher()
-    {
-        /// SET SUB POINTER TO PUBLISHER
-    }
-
     void IBasePublisher::subscribe(std::weak_ptr<IBaseCoreSubscriber> subscriber)
     {
         m_subscribers_.push_back(subscriber);
