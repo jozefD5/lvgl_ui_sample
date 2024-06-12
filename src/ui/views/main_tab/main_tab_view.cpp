@@ -3,6 +3,7 @@
 
 
 namespace LvUi {
+
     MainTabView::MainTabView(IBasePublisher *publisher)
     {
         m_publisher = publisher;

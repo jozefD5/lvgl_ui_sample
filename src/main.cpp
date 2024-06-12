@@ -3,10 +3,11 @@
 #include <unistd.h>
 #include "lvgl/lvgl.h"
 #include "mvp/interfaces/base_pub_sub.h"
-#include "ui/views/main_tab/main_tab_view.h"
 #include "ui/models/main_model.h"
 #include "ui/presenters/main_presenter.h"
+#include "ui/views/main_tab/main_tab_view.h"
 #include "ui/views/ecg_view/ecg_view.h"
+#include "ui/views/oxygen_view/oxygen_view.h"
 
 #define SCREEN_SIZE_W     800
 #define SCREEN_SIZE_H     480
@@ -16,19 +17,10 @@
  */
 
 
-
 /*******************************************************************************
- * Function prototype
+ * Function prototypes
  ******************************************************************************/
 static lv_display_t * hal_init(int32_t w, int32_t h);
-
-
-/*******************************************************************************
- * Private Static variables
- ******************************************************************************/
-
-
-
 
 
 
@@ -51,9 +43,7 @@ int main(int argc, char **argv) {
                                                LV_FONT_DEFAULT);
 
     lv_disp_set_theme(dispp, theme);
-
     static lv_obj_t* active_screen = lv_obj_create(NULL);
-
 
     // Main tab.
     LvUi::MainModel mainModel;
@@ -66,6 +56,11 @@ int main(int argc, char **argv) {
     auto ecgTab = std::make_shared<LvUi::EcgView>(&mainPresenter);
     mainPresenter.subscribe(ecgTab);
     ecgTab->init();
+
+    // Oxygen tab view.
+    auto oxygenTab = std::make_shared<LvUi::OxygenView>(&mainPresenter);
+    mainPresenter.subscribe(oxygenTab);
+    oxygenTab->init();
 
 
 
