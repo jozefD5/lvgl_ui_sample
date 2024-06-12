@@ -20,5 +20,10 @@ namespace LvUi {
             lv_timer_t *m_ecg_data_timer;
             lv_obj_t *m_ecg_chart;
             lv_chart_series_t *m_ecg_chart_series;
+
+            // Oxygen data.
+            lv_timer_t *m_oxygen_data_timer;
+            lv_obj_t *m_oxygen_chart;
+            lv_chart_series_t *m_oxygen_chart_series;
     };
 }

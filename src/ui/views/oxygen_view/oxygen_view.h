@@ -1,6 +1,7 @@
 #pragma once
 #include "mvp/interfaces/base_pub_sub.h"
 #include "models/main_model.h"
+#include "presenters/main_presenter.h"
 #include "lvgl/lvgl.h"
 
 using namespace BaseMvp;
@@ -13,8 +14,15 @@ namespace LvUi {
      ******************************************************************************/
     class OxygenView : public IBaseSubscriber {
         public:
-            // Pointer to presenter's model (data).
-            MainModel *m_model_;
+            MainModel *m_model_;          // Pointer to presenter's model (data).
+            lv_obj_t *m_oxygen_switch;    // ECG enable/disable switch.
+
+        private:
+            /*******************************************************************************
+             * @brief Static function used as call back for switch.
+             *
+             ******************************************************************************/
+            static void switch_event_callback(lv_event_t *e);
 
         public:
             /*******************************************************************************

@@ -46,12 +46,20 @@ namespace LvUi {
 
         private:
             /*******************************************************************************
-             * @brief enable/disable ECG demo data.
+             * @brief Enable/disable ECG demo data.
              *
              * @param enable enable / disable flag
              *
              ******************************************************************************/
             void setEcgDemoData(const bool enable);
+
+            /*******************************************************************************
+             * @brief Enable/disable oxygen demo data.
+             *
+             * @param enable enable / disable flag
+             *
+             ******************************************************************************/
+            void setOxygenDemoData(const bool enable);
 
             /*******************************************************************************
              * @brief
@@ -60,6 +68,14 @@ namespace LvUi {
              *
              ******************************************************************************/
             static void ecg_demo_data_timer_handler(lv_timer_t *timer);
+
+            /*******************************************************************************
+             * @brief
+             *
+             * @param timer
+             *
+             ******************************************************************************/
+            static void oxygen_demo_data_timer_handler(lv_timer_t *timer);
 
         public:
             /*******************************************************************************

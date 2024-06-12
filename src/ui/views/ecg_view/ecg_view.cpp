@@ -92,12 +92,6 @@ namespace LvUi {
         lv_scale_set_major_tick_every(ui_ecgChart_Yaxis2, 2 >= 1 ? 2 : 1);
         m_model_->m_ecg_chart_series = lv_chart_add_series(m_model_->m_ecg_chart, lv_color_hex(0xDA1905), LV_CHART_AXIS_PRIMARY_Y);
 
-
-        // static lv_coord_t ui_ecgChart_series_1_array[] = { 0 };
-        // lv_chart_set_ext_y_array(m_model_->m_ecg_chart, ui_ecgChart_series_1, ui_ecgChart_series_1_array);
-
-
-
         //This workaround (an invisible outline) is needed because without it chart overflow-visible doesn't work in LVGL-9.1
         lv_obj_set_style_outline_pad(m_model_->m_ecg_chart, LV_MAX3(50, 50, 25), LV_STATE_DEFAULT);   //workaround for ineffective 'overflow visible' flag
         lv_obj_set_style_outline_width(m_model_->m_ecg_chart, -1, LV_STATE_DEFAULT);
