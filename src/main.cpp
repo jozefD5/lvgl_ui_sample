@@ -14,7 +14,9 @@
 #define SCREEN_SIZE_H     480
 
 /**
- * TODO, add styling to specific class.
+ * TODO,
+ *     * add styling to specific class.
+ *     * interface should pass by reference not by value.
  */
 
 

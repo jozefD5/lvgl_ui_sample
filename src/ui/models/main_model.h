@@ -15,5 +15,10 @@ namespace LvUi {
             lv_obj_t *m_main_tab;
             lv_obj_t *m_ecg_tab;
             lv_obj_t *m_oxygen_tab;
+
+            // ECG data.
+            lv_timer_t *m_ecg_data_timer;
+            lv_obj_t *m_ecg_chart;
+            lv_chart_series_t *m_ecg_chart_series;
     };
 }

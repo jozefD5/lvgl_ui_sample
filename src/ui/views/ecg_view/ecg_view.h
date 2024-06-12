@@ -15,8 +15,16 @@ namespace LvUi {
     class EcgView : public IBaseSubscriber
     {
         private:
-            // Pointer to presenter's model (data).
-            MainModel *m_model_;
+
+            MainModel *m_model_;       // Pointer to presenter's model (data).
+            lv_obj_t *m_ecg_switch;    // ECG enable/disable switch.
+
+        private:
+            /*******************************************************************************
+             * @brief Static function used as call back for switch.
+             *
+             ******************************************************************************/
+            static void switch_event_callback(lv_event_t *e);
 
         public:
             /*******************************************************************************
