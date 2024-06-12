@@ -9,10 +9,10 @@ namespace LvUi {
         m_model_ = static_cast<MainModel *>(m_publisher->getModel());
     }
 
-    void MainTabView::init(lv_obj_t *active_screen)
+    void MainTabView::init(lv_obj_t *active_view)
     {
         // Set tab view position and style.
-        lv_obj_t* m_main_tab_view = lv_tabview_create(active_screen);
+        lv_obj_t* m_main_tab_view = lv_tabview_create(active_view);
         lv_tabview_set_tab_bar_position(m_main_tab_view, LV_DIR_BOTTOM);
         lv_tabview_set_tab_bar_size(m_main_tab_view, 50);
         lv_obj_set_width(m_main_tab_view, lv_pct(100));

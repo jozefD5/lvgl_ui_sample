@@ -5,10 +5,16 @@
 #include "mvp/interfaces/base_pub_sub.h"
 #include "ui/views/main_tab/main_tab_view.h"
 #include "ui/models/main_model.h"
-#include "ui/presenter/main_presenter.h"
+#include "ui/presenters/main_presenter.h"
+#include "ui/views/ecg_view/ecg_view.h"
 
-#define SCREEN_SIZE_W     1280
-#define SCREEN_SIZE_H     720
+#define SCREEN_SIZE_W     800
+#define SCREEN_SIZE_H     480
+
+/**
+ * TODO, add styling to specific class.
+ */
+
 
 
 /*******************************************************************************
@@ -25,6 +31,8 @@ static lv_display_t * hal_init(int32_t w, int32_t h);
 
 
 
+
+
 int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
@@ -34,10 +42,6 @@ int main(int argc, char **argv) {
 
     // Initialize the HAL (display, input devices, tick) for LVGL.
     hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
-
-    // // Main view background color.
-    // static lv_obj_t *main_active_screen = lv_screen_active();
-    // lv_obj_set_style_bg_color(main_active_screen, lv_color_hex(MAIN_VIEW_BACKGROUN_COLOR), LV_PART_MAIN);
 
     lv_disp_t * dispp = lv_display_get_default();
     lv_theme_t * theme = lv_theme_default_init(dispp,
@@ -58,8 +62,10 @@ int main(int argc, char **argv) {
     mainPresenter.subscribe(mainTabiew);
     mainTabiew->init(active_screen);
 
-
-
+    // ECG tab.
+    auto ecgTab = std::make_shared<LvUi::EcgView>(&mainPresenter);
+    mainPresenter.subscribe(ecgTab);
+    ecgTab->init();
 
 
 

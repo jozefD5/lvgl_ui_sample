@@ -1,36 +1,39 @@
 #pragma once
+#include "lvgl/lvgl.h"
 #include "mvp/interfaces/base_pub_sub.h"
 #include "models/main_model.h"
-#include "lvgl/lvgl.h"
+#include "presenters/main_presenter.h"
 
 using namespace BaseMvp;
 
 namespace LvUi {
-
     /*******************************************************************************
-     * @brief Main tab view, provides bottom tabs for Main, ECG and Oxygen tabs.
+     * @brief ECG view, displays ECG data.
      *
      ******************************************************************************/
-    class MainTabView : public IBaseSubscriber{
-        public:
+    class EcgView : public IBaseSubscriber
+    {
+        private:
             // Pointer to presenter's model (data).
             MainModel *m_model_;
 
         public:
             /*******************************************************************************
-             * @brief Construct a new Main Tab View object
+             * @brief Construct a new Ecg View object
              *
              * @param publisher pointer to publisher for bi-directional communication.
              *
              ******************************************************************************/
-            MainTabView(IBasePublisher *publisher);
+            EcgView(IBasePublisher *publisher);
 
             /*******************************************************************************
              * @brief Initialise core components and create UI.
              *
-             * @param active_view pointer to active screen/view widget.
-             *
              ******************************************************************************/
-            void init(lv_obj_t *active_view);
+            void init(void);
+
     };
+
+
+
 }
