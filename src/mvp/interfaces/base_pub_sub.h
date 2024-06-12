@@ -15,8 +15,6 @@ namespace BaseMvp {
             // Notification type used to distinguished between notifications. e.g.
             // button press = 0 and button hold = 1. This should preferably be enum
             int m_notification_type;
-
-        IBaseNotificationType(int type);
     };
 
     /*******************************************************************************
@@ -46,7 +44,7 @@ namespace BaseMvp {
              * @param notification notification object which includes notification type integer.
              *
              ******************************************************************************/
-            void onNotify(IBaseNotificationType notification);
+            void onNotify(IBaseNotificationType *notification);
     };
 
     /*******************************************************************************
@@ -81,7 +79,7 @@ namespace BaseMvp {
              * @param type notification type.
              *
              ******************************************************************************/
-            void notifySubscribers(IBaseNotificationType type);
+            void notifySubscribers(IBaseNotificationType *type);
 
             /*******************************************************************************
              * @brief Interface for subscriber to send data to publisher.
@@ -89,7 +87,7 @@ namespace BaseMvp {
              * @param type notification type.
              *
              ******************************************************************************/
-            virtual void onSubscriberData(IBaseNotificationType type) = 0;
+            virtual void onSubscriberData(IBaseNotificationType *type) = 0;
 
             /*******************************************************************************
              * @brief Get the Model object.
@@ -109,6 +107,10 @@ namespace BaseMvp {
             // Pointer to publisher, used for bi-depiction communication.
             IBasePublisher *m_publisher;
 
+        public:
+            void notifyPublisher(IBaseNotificationType *type) {
+                m_publisher->onSubscriberData(type);
+            }
     };
 
 }
