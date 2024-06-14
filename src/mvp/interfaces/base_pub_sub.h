@@ -113,4 +113,25 @@ namespace BaseMvp {
             }
     };
 
+
+    /*******************************************************************************
+     * @brief Base Presenter template class.
+     *
+     ******************************************************************************/
+    template <class T>
+    class BasePresenter : public IBasePublisher {
+        public:
+            // Data model.
+            T *m_dataModel_;
+
+            /*******************************************************************************
+             * @brief Get the Model object.
+             *
+             * @return T* pointer to model data object.
+             ******************************************************************************/
+            T* getModel(void) {
+                return m_dataModel_;
+            }
+    };
+
 }
