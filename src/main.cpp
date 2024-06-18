@@ -57,20 +57,20 @@ int main(int argc, char **argv) {
     mainPresenter.subscribe(mainTabiew);
     mainTabiew->init(active_screen);
 
-    // Menu tab.
-    auto menuTab = std::make_shared<LvUi::MenuView>(&mainPresenter);
-    mainPresenter.subscribe(menuTab);
-    menuTab->init();
+    // // Menu tab.
+    // auto menuTab = std::make_shared<LvUi::MenuView>(&mainPresenter);
+    // mainPresenter.subscribe(menuTab);
+    // menuTab->init();
 
-    // ECG tab.
-    auto ecgTab = std::make_shared<LvUi::EcgView>(&mainPresenter);
-    mainPresenter.subscribe(ecgTab);
-    ecgTab->init();
+    // // ECG tab.
+    // auto ecgTab = std::make_shared<LvUi::EcgView>(&mainPresenter);
+    // mainPresenter.subscribe(ecgTab);
+    // ecgTab->init();
 
-    // Oxygen tab view.
-    auto oxygenTab = std::make_shared<LvUi::OxygenView>(&mainPresenter);
-    mainPresenter.subscribe(oxygenTab);
-    oxygenTab->init();
+    // // Oxygen tab view.
+    // auto oxygenTab = std::make_shared<LvUi::OxygenView>(&mainPresenter);
+    // mainPresenter.subscribe(oxygenTab);
+    // oxygenTab->init();
 
     lv_disp_load_scr(active_screen);
 

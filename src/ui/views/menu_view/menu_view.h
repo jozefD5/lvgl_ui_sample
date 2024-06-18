@@ -5,31 +5,31 @@
 
 using namespace BaseMvp;
 
-namespace LvUi {
+// namespace LvUi {
 
-    /*******************************************************************************
-     * @brief Main menu tab, displays ecg and oxygen data.
-     *
-     ******************************************************************************/
-    class MenuView : public IBaseSubscriber {
-        public:
-            // Pointer to presenter's model (data).
-            MainModel *m_model_;
+//     /*******************************************************************************
+//      * @brief Main menu tab, displays ecg and oxygen data.
+//      *
+//      ******************************************************************************/
+//     class MenuView : public IBaseSubscriber {
+//         public:
+//             // Pointer to presenter's model (data).
+//             MainModel *m_model_;
 
-        public:
-            /*******************************************************************************
-             * @brief Construct a new Menu View object
-             *
-             * @param publisher pointer to publisher for bi-directional communication.
-             *
-             ******************************************************************************/
-            MenuView(IBasePublisher *publisher);
+//         public:
+//             /*******************************************************************************
+//              * @brief Construct a new Menu View object
+//              *
+//              * @param publisher pointer to publisher for bi-directional communication.
+//              *
+//              ******************************************************************************/
+//             MenuView(IBasePublisher *publisher);
 
-            /*******************************************************************************
-             * @brief Initialise core components and create UI.
-             *
-             ******************************************************************************/
-            void init(void);
+//             /*******************************************************************************
+//              * @brief Initialise core components and create UI.
+//              *
+//              ******************************************************************************/
+//             void init(void);
 
-    };
-}
+//     };
+// }

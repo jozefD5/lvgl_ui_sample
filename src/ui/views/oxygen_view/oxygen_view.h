@@ -6,38 +6,38 @@
 
 using namespace BaseMvp;
 
-namespace LvUi {
+// namespace LvUi {
 
-    /*******************************************************************************
-     * @brief Oxygen data view.
-     *
-     ******************************************************************************/
-    class OxygenView : public IBaseSubscriber {
-        public:
-            MainModel *m_model_;          // Pointer to presenter's model (data).
-            lv_obj_t *m_oxygen_switch;    // ECG enable/disable switch.
+//     /*******************************************************************************
+//      * @brief Oxygen data view.
+//      *
+//      ******************************************************************************/
+//     class OxygenView : public IBaseSubscriber {
+//         public:
+//             MainModel *m_model_;          // Pointer to presenter's model (data).
+//             lv_obj_t *m_oxygen_switch;    // ECG enable/disable switch.
 
-        private:
-            /*******************************************************************************
-             * @brief Static function used as call back for switch.
-             *
-             ******************************************************************************/
-            static void switch_event_callback(lv_event_t *e);
+//         private:
+//             /*******************************************************************************
+//              * @brief Static function used as call back for switch.
+//              *
+//              ******************************************************************************/
+//             static void switch_event_callback(lv_event_t *e);
 
-        public:
-            /*******************************************************************************
-             * @brief Construct a new Oxygen View object
-             *
-             * @param publisher pointer to publisher for bi-directional communication.
-             *
-             ******************************************************************************/
-            OxygenView(IBasePublisher *publisher);
+//         public:
+//             /*******************************************************************************
+//              * @brief Construct a new Oxygen View object
+//              *
+//              * @param publisher pointer to publisher for bi-directional communication.
+//              *
+//              ******************************************************************************/
+//             OxygenView(IBasePublisher *publisher);
 
-            /*******************************************************************************
-             * @brief Initialise core components and create UI.
-             *
-             ******************************************************************************/
-            void init(void);
-    };
+//             /*******************************************************************************
+//              * @brief Initialise core components and create UI.
+//              *
+//              ******************************************************************************/
+//             void init(void);
+//     };
 
-}
+// }

@@ -13,6 +13,9 @@ namespace LvUi {
      ******************************************************************************/
     class MainTabView : public IBaseSubscriber {
         public:
+            // Main publisher (presenter).
+            IBasePublisher *m_publisher;
+
             // Pointer to presenter's model (data).
             MainModel *m_model_;
 

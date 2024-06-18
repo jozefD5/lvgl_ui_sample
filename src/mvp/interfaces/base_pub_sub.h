@@ -104,11 +104,14 @@ namespace BaseMvp {
      ******************************************************************************/
     class IBaseSubscriber : public IBaseCoreSubscriber {
         public:
-            // Pointer to publisher, used for bi-depiction communication.
-            IBasePublisher *m_publisher;
-
-        public:
-            void notifyPublisher(IBaseNotificationType *type) {
+            /*******************************************************************************
+             * @brief
+             *
+             * @param type
+             * @param m_publisher
+             *
+             ******************************************************************************/
+            void notifyPublisher(IBaseNotificationType *type, IBasePublisher *m_publisher) {
                 m_publisher->onSubscriberData(type);
             }
     };
