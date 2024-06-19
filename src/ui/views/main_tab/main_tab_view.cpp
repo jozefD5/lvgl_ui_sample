@@ -4,7 +4,7 @@
 
 namespace LvUi {
 
-    MainTabView::MainTabView(IBasePublisher *publisher)
+    MainTabView::MainTabView(BasePublisher *publisher)
     {
         m_publisher = publisher;
         m_model_ = static_cast<MainModel *>(m_publisher->getModel());

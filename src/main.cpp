@@ -79,42 +79,6 @@ int main(int argc, char **argv) {
       usleep(5 * 1000);
     }
 
-
-
-/*
-
-    std::function<void(const void*)> callb1 = [](const void*){
-      std::cout << "callback 1\n\r";
-    };
-
-    std::function<void(const void*)> callb2 = [](const void*){
-      std::cout << "callback 2\n\r";
-    };
-
-
-
-    BaseMvp::IBaseNotificationType notification1 = BaseMvp::IBaseNotificationType(0);
-    BaseMvp::IBaseNotificationType notification2 = BaseMvp::IBaseNotificationType(1);
-
-    BaseMvp::IBasePublisher publisher;
-
-
-    auto sub1 = std::make_shared<BaseMvp::IBaseSubscriber>();
-    sub1->setNotificationCallback(notification1, callb1);
-    publisher.subscribe(sub1);
-
-    auto sub2 = std::make_shared<BaseMvp::IBaseSubscriber>();
-    sub2->setNotificationCallback(notification2, callb2);
-    publisher.subscribe(sub2);
-
-
-
-    publisher.notifySubscribers(notification2);
-    publisher.notifySubscribers(notification1);
-
-
-
-*/
     return 0;
 }
 

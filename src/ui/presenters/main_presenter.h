@@ -12,7 +12,7 @@ namespace LvUi {
      * @brief Main application presenter, handles core application business logic.
      *
      ******************************************************************************/
-    class MainPresenter : public IBasePublisher{
+    class MainPresenter : public BasePublisher{
         public:
             MainModel *m_dataModel_;
 

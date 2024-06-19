@@ -18,11 +18,11 @@ namespace BaseMvp {
     };
 
     /*******************************************************************************
-     * @brief Subscriber provides interface to subscribe to IBasePublisher and
+     * @brief Subscriber provides core interface to subscribe to BasePublisher and
      *        received notification of any event.
      *
      ******************************************************************************/
-    class IBaseCoreSubscriber {
+    class BaseCoreSubscriber {
         private:
             // Map of callback functions mapped notification type key.
             std::map<int, std::function<void(const void*)>> m_callbacks_;
@@ -35,7 +35,8 @@ namespace BaseMvp {
              * @param callback callback function mapped to notification type.
              *
              ******************************************************************************/
-            void setNotificationCallback(IBaseNotificationType type, std::function<void(const void*)>& callback);
+            void setNotificationCallback(IBaseNotificationType type,
+                                        std::function<void(const void*)>& callback);
 
             /*******************************************************************************
              * @brief Subscriber notification event receive method. Call required callback
@@ -48,13 +49,13 @@ namespace BaseMvp {
     };
 
     /*******************************************************************************
-     * @brief Publisher interface, allows to notify all subscribers of specific events.
+     * @brief Publisher allows to notify all subscribers of specific events.
      *
      ******************************************************************************/
-    class IBasePublisher {
+    class BasePublisher {
         private:
             // List of subscriber.
-            std::vector<std::weak_ptr<IBaseCoreSubscriber>> m_subscribers_;
+            std::vector<std::weak_ptr<BaseCoreSubscriber>> m_subscribers_;
 
         public:
             /*******************************************************************************
@@ -63,7 +64,7 @@ namespace BaseMvp {
              * @param subscriber Subscriber to be added.
              *
              ******************************************************************************/
-            void subscribe(std::weak_ptr<IBaseCoreSubscriber> subscriber);
+            void subscribe(std::weak_ptr<BaseCoreSubscriber> subscriber);
 
             /*******************************************************************************
              * @brief Unsubscribe from publisher.
@@ -71,7 +72,7 @@ namespace BaseMvp {
              * @param subscriber subscriber to be removed.
              *
              ******************************************************************************/
-            void unsubscribe(std::weak_ptr<IBaseCoreSubscriber> subscriber);
+            void unsubscribe(std::weak_ptr<BaseCoreSubscriber> subscriber);
 
             /*******************************************************************************
              * @brief Notify all subscribers of new notification event.
@@ -99,42 +100,19 @@ namespace BaseMvp {
 
     /*******************************************************************************
      * @brief Subscriber, in addition to core subscriber this class also includes
-     *        poiser to publisher for bi-directional communication.
+     *        additional functionality to support publisher/subscriber interface.
      *
      ******************************************************************************/
-    class IBaseSubscriber : public IBaseCoreSubscriber {
+    class BaseSubscriber : public BaseCoreSubscriber {
         public:
             /*******************************************************************************
-             * @brief
+             * @brief Notify publisher, send notification to publisher.
              *
-             * @param type
-             * @param m_publisher
+             * @param type Notification object.
+             * @param m_publisher Publisher to be notified.
              *
              ******************************************************************************/
-            void notifyPublisher(IBaseNotificationType *type, IBasePublisher *m_publisher) {
-                m_publisher->onSubscriberData(type);
-            }
-    };
-
-
-    /*******************************************************************************
-     * @brief Base Presenter template class.
-     *
-     ******************************************************************************/
-    template <class T>
-    class BasePresenter : public IBasePublisher {
-        public:
-            // Data model.
-            T *m_dataModel_;
-
-            /*******************************************************************************
-             * @brief Get the Model object.
-             *
-             * @return T* pointer to model data object.
-             ******************************************************************************/
-            T* getModel(void) {
-                return m_dataModel_;
-            }
+            void notifyPublisher(IBaseNotificationType *type, BasePublisher *m_publisher);
     };
 
 }

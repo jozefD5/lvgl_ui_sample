@@ -11,10 +11,10 @@ namespace LvUi {
      * @brief Main tab view, provides bottom tabs for Main, ECG and Oxygen tabs.
      *
      ******************************************************************************/
-    class MainTabView : public IBaseSubscriber {
+    class MainTabView : public BaseSubscriber {
         public:
             // Main publisher (presenter).
-            IBasePublisher *m_publisher;
+            BasePublisher *m_publisher;
 
             // Pointer to presenter's model (data).
             MainModel *m_model_;
@@ -26,7 +26,7 @@ namespace LvUi {
              * @param publisher pointer to publisher for bi-directional communication.
              *
              ******************************************************************************/
-            MainTabView(IBasePublisher *publisher);
+            MainTabView(BasePublisher *publisher);
 
             /*******************************************************************************
              * @brief Initialise core components and create UI.
