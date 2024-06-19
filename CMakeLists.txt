@@ -38,9 +38,6 @@ target_link_libraries(
 
 if(LV_USE_DRAW_SDL)
     set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
-    # Need to install libsdl2-image-dev
-    # `sudo apt install libsdl2-image-dev`
-    # `brew install sdl2_image`
     find_package(SDL2_image REQUIRED)
     target_include_directories(lvgl PUBLIC ${SDL2_IMAGE_INCLUDE_DIRS})
     target_link_libraries(main ${SDL2_IMAGE_LIBRARIES} CoreLib)
