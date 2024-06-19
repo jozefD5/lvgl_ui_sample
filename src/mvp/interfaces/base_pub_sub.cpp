@@ -6,6 +6,11 @@
 
 namespace BaseMvp {
 
+    IBaseNotificationType::IBaseNotificationType(int id, int type)
+        : m_publisher_id(id), m_notification_type(type)
+    {
+    }
+
     void BaseCoreSubscriber::setNotificationCallback(
         IBaseNotificationType type,
         std::function<void(const void*)>& callback) {
@@ -25,6 +30,20 @@ namespace BaseMvp {
                                          BasePublisher *m_publisher)
     {
         m_publisher->onSubscriberData(type);
+    }
+
+
+    int BasePublisher::m_next_id_ = 0;
+
+    BasePublisher::BasePublisher(void)
+    {
+        m_id_ = m_next_id_;
+        m_next_id_++;
+    }
+
+    int BasePublisher::getId(void)
+    {
+        return m_id_;
     }
 
     void BasePublisher::subscribe(std::weak_ptr<BaseCoreSubscriber> subscriber)
@@ -49,4 +68,5 @@ namespace BaseMvp {
             }
         }
     }
+
 }

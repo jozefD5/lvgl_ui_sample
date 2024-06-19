@@ -12,9 +12,21 @@ namespace BaseMvp {
      ******************************************************************************/
     class IBaseNotificationType {
         public:
+            // Publisher Id, used to distinguished between publishes.
+            int m_publisher_id;
+
             // Notification type used to distinguished between notifications. e.g.
             // button press = 0 and button hold = 1. This should preferably be enum
             int m_notification_type;
+
+            /*******************************************************************************
+             * @brief Construct a new IBaseNotificationType object
+             *
+             * @param id Publisher's Id.
+             * @param type Notification type identifier value.
+             *
+             ******************************************************************************/
+            IBaseNotificationType(int id, int type);
     };
 
     /*******************************************************************************
@@ -54,10 +66,25 @@ namespace BaseMvp {
      ******************************************************************************/
     class BasePublisher {
         private:
+            // Unique Id for publisher instance.
+            static int m_next_id_;
+
+            // Id of publisher instance.
+            int m_id_;
+
             // List of subscriber.
             std::vector<std::weak_ptr<BaseCoreSubscriber>> m_subscribers_;
 
         public:
+            BasePublisher(void);
+
+            /*******************************************************************************
+             * @brief Get the Id object
+             *
+             * @return int Id of publisher instance.
+             ******************************************************************************/
+            int getId(void);
+
             /*******************************************************************************
              * @brief Add new subscriber.
              *

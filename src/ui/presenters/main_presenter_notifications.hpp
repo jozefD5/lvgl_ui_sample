@@ -15,7 +15,7 @@ namespace LvUi {
         public:
             int m_state;
 
-        NEcgSetSwitchState(int state): m_state(state) {
+        NEcgSetSwitchState(int id, int type, int state) : IBaseNotificationType(id, type) {
             m_notification_type = 0;
         }
     };
@@ -28,7 +28,7 @@ namespace LvUi {
         public:
             int m_state;
 
-        NOxygenSetSwitchState(int state): m_state(state) {
+        NOxygenSetSwitchState(int id, int type, int state) : IBaseNotificationType(id, type) {
             m_notification_type = 1;
         }
     };
