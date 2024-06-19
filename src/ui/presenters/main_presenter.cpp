@@ -1,8 +1,8 @@
 #include <iostream>
-#include "main_presenter.h"
-#include "main_presenter_notifications.h"
 #include "lvgl/lvgl.h"
-#include "mvp/interfaces/base_pub_sub.h"
+#include "main_presenter.hpp"
+#include "main_presenter_notifications.hpp"
+#include "mvp/interfaces/base_pub_sub.hpp"
 
 namespace LvUi {
 

@@ -2,13 +2,10 @@
 #include <iostream>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
-#include "mvp/interfaces/base_pub_sub.h"
-#include "ui/models/main_model.h"
-#include "ui/presenters/main_presenter.h"
-#include "ui/views/main_tab/main_tab_view.h"
-#include "ui/views/menu_view/menu_view.h"
-#include "ui/views/ecg_view/ecg_view.h"
-#include "ui/views/oxygen_view/oxygen_view.h"
+#include "mvp/interfaces/base_pub_sub.hpp"
+#include "ui/models/main_model.hpp"
+#include "ui/presenters/main_presenter.hpp"
+#include "ui/views/main_tab/main_tab_view.hpp"
 
 #define SCREEN_SIZE_W     800
 #define SCREEN_SIZE_H     480
@@ -21,7 +18,13 @@
 
 
 /*******************************************************************************
- * Function prototypes
+ * @brief Initialize the Hardware Abstraction Layer (HAL) for the LVGL graphics
+ *        library
+ *
+ * @param w  display width in pixels
+ * @param h  display height in pixels
+ *
+ * @return lv_display_t* pointer to structure representing display.
  ******************************************************************************/
 static lv_display_t * hal_init(int32_t w, int32_t h);
 
@@ -83,19 +86,9 @@ int main(int argc, char **argv) {
 }
 
 
-
-/*******************************************************************************
- * @brief Initialize the Hardware Abstraction Layer (HAL) for the LVGL graphics
- *        library
- *
- * @param w  display width in pixels
- * @param h  display height in pixels
- *
- * @return lv_display_t* pointer to structure representing display.
- ******************************************************************************/
+// Initialize the Hardware Abstraction Layer (HAL).
 static lv_display_t * hal_init(int32_t w, int32_t h)
 {
-
   lv_group_set_default(lv_group_create());
 
   lv_display_t* disp = lv_sdl_window_create(w, h);

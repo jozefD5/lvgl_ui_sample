@@ -1,7 +1,7 @@
 #pragma once
-#include "mvp/interfaces/base_pub_sub.h"
-#include "models/main_model.h"
 #include "lvgl/lvgl.h"
+#include "mvp/interfaces/base_pub_sub.hpp"
+#include "models/main_model.hpp"
 
 using namespace BaseMvp;
 

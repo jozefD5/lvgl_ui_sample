@@ -1,5 +1,5 @@
 #pragma once
-#include "mvp/interfaces/base_pub_sub.h"
+#include "mvp/interfaces/base_pub_sub.hpp"
 #include "lvgl/lvgl.h"
 
 namespace LvUi {

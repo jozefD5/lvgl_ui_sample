@@ -1,8 +1,8 @@
 #pragma once
 #include "lvgl/lvgl.h"
-#include "mvp/interfaces/base_pub_sub.h"
-#include "models/main_model.h"
-#include "main_presenter_notifications.h"
+#include "mvp/interfaces/base_pub_sub.hpp"
+#include "models/main_model.hpp"
+#include "main_presenter_notifications.hpp"
 
 using namespace BaseMvp;
 
@@ -15,7 +15,6 @@ namespace LvUi {
     class MainPresenter : public BasePublisher{
         public:
             MainModel *m_dataModel_;
-
 
         private:
             /*******************************************************************************

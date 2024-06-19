@@ -19,7 +19,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/core
 )
 
-add_executable(${PROJECT_NAME} src/main.cpp  src/mouse_cursor_icon.c  src/main.h)
+add_executable(${PROJECT_NAME} src/main.cpp  src/mouse_cursor_icon.c  src/main.hpp)
 target_compile_definitions(${PROJECT_NAME} PRIVATE LV_CONF_INCLUDE_SIMPLE)
 set(LV_CONF_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lv_conf.h CACHE STRING "" FORCE)
 
