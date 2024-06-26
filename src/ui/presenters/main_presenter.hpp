@@ -3,6 +3,7 @@
 #include "mvp/interfaces/base_pub_sub.hpp"
 #include "models/main_model.hpp"
 #include "main_presenter_notifications.hpp"
+#include "mvp/interfaces/publisher/base_publisher.hpp"
 
 using namespace BaseMvp;
 
@@ -63,3 +64,47 @@ namespace LvUi {
             void* getModel(void) override;
     };
 }
+
+
+typedef enum {
+    TEST_EVENT_TYPE1 = 0,
+    TEST_EVENT_TYPE2,
+} main_app_event_t;
+
+
+
+class TestEvent1 : public BaseMvp::BaseEvent {
+    public:
+        TestEvent1() : BaseEvent(TEST_EVENT_TYPE1) {}
+};
+
+class TestEvent2 : public BaseMvp::BaseEvent {
+    public:
+        TestEvent2() : BaseEvent(TEST_EVENT_TYPE2) {}
+};
+
+
+
+
+
+class MainAppPresenter : public BaseMvp::BasePresenter {
+    private:
+    void tesEvent1Callback(BaseEvent& event) {
+        std::cout << "ID: " << getId() << ", TEST_EVENT_TYPE1" << std::endl;
+    }
+
+    void tesEvent2Callback(BaseEvent& event) {
+        std::cout << "ID: " << getId() << ", TEST_EVENT_TYPE2" << std::endl;
+    }
+
+
+    public:
+        MainAppPresenter() {
+            std::cout << "ID: " << getId() << std::endl;
+
+            // Register events.
+            registerEvent(TestEvent1(), std::bind(&MainAppPresenter::tesEvent1Callback, this, std::placeholders::_1));
+            registerEvent(TestEvent2(), std::bind(&MainAppPresenter::tesEvent2Callback, this, std::placeholders::_1));
+
+        }
+};

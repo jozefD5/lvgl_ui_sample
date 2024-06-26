@@ -19,7 +19,7 @@ namespace BaseMvp {
         return id_;
     }
 
-    void BasePresenter::registerEvent(BaseEvent &event, std::function<void(BaseEvent &)> handler)
+    void BasePresenter::registerEvent(BaseEvent event, std::function<void(BaseEvent&)> handler)
     {
         callBacks_.insert({event.eventType, handler});
     }

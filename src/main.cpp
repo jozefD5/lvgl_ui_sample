@@ -51,14 +51,26 @@ int main(int argc, char **argv) {
     lv_disp_set_theme(dispp, theme);
     static lv_obj_t* active_screen = lv_obj_create(NULL);
 
-    // Initialize model and publisher.
-    LvUi::MainModel mainModel;
-    LvUi::MainPresenter mainPresenter(&mainModel);
+    TestEvent1 test1;
+    TestEvent2 test2;
 
-    // Main tab view.
-    auto mainTabiew = std::make_shared<LvUi::MainTabView>(&mainPresenter);
-    mainPresenter.subscribe(mainTabiew);
-    mainTabiew->init(active_screen);
+    MainAppPresenter mainPresenter;
+    MainAppPresenter mainPresenter2;
+
+    mainPresenter.addEvent(test1);
+    mainPresenter.addEvent(test2);
+
+    mainPresenter2.addEvent(test1);
+    mainPresenter2.addEvent(test2);
+
+    // // Initialize model and publisher.
+    // LvUi::MainModel mainModel;
+    // LvUi::MainPresenter mainPresenter(&mainModel);
+
+    // // Main tab view.
+    // auto mainTabiew = std::make_shared<LvUi::MainTabView>(&mainPresenter);
+    // mainPresenter.subscribe(mainTabiew);
+    // mainTabiew->init(active_screen);
 
     // // Menu tab.
     // auto menuTab = std::make_shared<LvUi::MenuView>(&mainPresenter);
@@ -75,12 +87,12 @@ int main(int argc, char **argv) {
     // mainPresenter.subscribe(oxygenTab);
     // oxygenTab->init();
 
-    lv_disp_load_scr(active_screen);
+    // lv_disp_load_scr(active_screen);
 
-    while(1) {
-      lv_timer_handler();
-      usleep(5 * 1000);
-    }
+    // while(1) {
+    //   lv_timer_handler();
+    //   usleep(5 * 1000);
+    // }
 
     return 0;
 }

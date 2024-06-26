@@ -16,12 +16,13 @@ namespace BaseMvp {
      ******************************************************************************/
     class BaseEvent {
         public:
-            int eventType;
+            uint64_t eventType;
 
             BaseEvent(int id);
     };
 
 
+    // TODO set it as template class to include data model.
     /*******************************************************************************
      * @brief Core functionality of presenter is to handler business logic and
      *        notify subscribers of any change in state.
@@ -33,7 +34,7 @@ namespace BaseMvp {
             int id_;
             std::map<int, std::function<void(BaseEvent&)>> callBacks_;
 
-        private:
+        protected:
             /*******************************************************************************
              * @brief Register event with handler (callback).
              *
@@ -41,7 +42,7 @@ namespace BaseMvp {
              * @param handler handler to be associated with event.
              *
              ******************************************************************************/
-            void registerEvent(BaseEvent& event, std::function<void(BaseEvent&)> handler);
+            void registerEvent(BaseEvent event, std::function<void(BaseEvent&)> handler);
 
         public:
             BasePresenter();
@@ -65,5 +66,6 @@ namespace BaseMvp {
 
 
     };
+
 
 }
