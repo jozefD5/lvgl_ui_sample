@@ -3,7 +3,8 @@
 #include <map>
 #include <functional>
 #include <memory>
-#include "../base_pub_sub.hpp"
+#include "../subscriber/base_subscriber.hpp"
+
 
 namespace BaseMvp {
 
@@ -33,6 +34,7 @@ namespace BaseMvp {
             static inline int nextId_;
             int id_;
             std::map<int, std::function<void(BaseEvent&)>> callbacks_;
+            std::vector<std::weak_ptr<BasePrimeSubscriber>> subscribers_;
 
         protected:
             /*******************************************************************************
@@ -63,6 +65,30 @@ namespace BaseMvp {
              *
              ******************************************************************************/
             void addEvent(BaseEvent &event);
+
+            /*******************************************************************************
+             * @brief Add new subscriber.
+             *
+             * @param subscriber Subscriber to be added.
+             *
+             ******************************************************************************/
+            void subscribe(std::weak_ptr<BasePrimeSubscriber> subscriber);
+
+            /*******************************************************************************
+             * @brief Unsubscribe from presenter.
+             *
+             * @param subscriber subscriber to be removed.
+             *
+             ******************************************************************************/
+            void unsubscribe(std::weak_ptr<BasePrimeSubscriber> subscriber);
+
+            /*******************************************************************************
+             * @brief Notify all subscribers of new notification event.
+             *
+             * @param type notification type.
+             *
+             ******************************************************************************/
+            void notifySubscribers(BaseNotification &type);
 
 
     };
