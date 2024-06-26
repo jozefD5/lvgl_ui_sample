@@ -3,7 +3,7 @@
 
 namespace BaseMvp {
 
-    BaseEvent::BaseEvent(int id): eventType(id)
+    BaseEvent::BaseEvent(int type): eventType(type)
     {
     }
 
@@ -21,13 +21,13 @@ namespace BaseMvp {
 
     void BasePresenter::registerEvent(BaseEvent event, std::function<void(BaseEvent&)> handler)
     {
-        callBacks_.insert({event.eventType, handler});
+        callbacks_[event.eventType] = handler;
     }
 
     void BasePresenter::addEvent(BaseEvent &event)
     {
-        auto element = callBacks_.find(event.eventType);
-        if (element != callBacks_.end())
+        auto element = callbacks_.find(event.eventType);
+        if (element != callbacks_.end())
         {
             element->second(event);
         }

@@ -16,9 +16,9 @@ namespace BaseMvp {
      ******************************************************************************/
     class BaseEvent {
         public:
-            uint64_t eventType;
+            int eventType;
 
-            BaseEvent(int id);
+            BaseEvent(int type);
     };
 
 
@@ -32,7 +32,7 @@ namespace BaseMvp {
         private:
             static inline int nextId_;
             int id_;
-            std::map<int, std::function<void(BaseEvent&)>> callBacks_;
+            std::map<int, std::function<void(BaseEvent&)>> callbacks_;
 
         protected:
             /*******************************************************************************
@@ -62,7 +62,7 @@ namespace BaseMvp {
              * @param event Event to be handled.
              *
              ******************************************************************************/
-            void addEvent(BaseEvent& event);
+            void addEvent(BaseEvent &event);
 
 
     };
