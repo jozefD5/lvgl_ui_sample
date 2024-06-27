@@ -36,20 +36,20 @@ int main(int argc, char **argv) {
     (void)argv;
 
     // Initialize LVGL.
-    lv_init();
+    // lv_init();
 
-    // Initialize the HAL (display, input devices, tick) for LVGL.
-    hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
+    // // Initialize the HAL (display, input devices, tick) for LVGL.
+    // hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
 
-    lv_disp_t * dispp = lv_display_get_default();
-    lv_theme_t * theme = lv_theme_default_init(dispp,
-                                               lv_palette_main(LV_PALETTE_BLUE),
-                                               lv_palette_main(LV_PALETTE_RED),
-                                               false,
-                                               LV_FONT_DEFAULT);
+    // lv_disp_t * dispp = lv_display_get_default();
+    // lv_theme_t * theme = lv_theme_default_init(dispp,
+    //                                            lv_palette_main(LV_PALETTE_BLUE),
+    //                                            lv_palette_main(LV_PALETTE_RED),
+    //                                            false,
+    //                                            LV_FONT_DEFAULT);
 
-    lv_disp_set_theme(dispp, theme);
-    static lv_obj_t* active_screen = lv_obj_create(NULL);
+    // lv_disp_set_theme(dispp, theme);
+    // static lv_obj_t* active_screen = lv_obj_create(NULL);
 
     TestEvent1 test1;
     TestEvent2 test2;
