@@ -7,24 +7,33 @@ namespace BaseMvp {
     {
     }
 
-
-    BasePresenter::BasePresenter()
+    template <class T>
+    BasePresenter<T>::BasePresenter()
     {
         id_ = nextId_;
         nextId_++;
     }
 
-    int BasePresenter::getId()
+    template <class T>
+    int BasePresenter<T>::getId()
     {
         return id_;
     }
 
-    void BasePresenter::registerEvent(BaseEvent event, std::function<void(BaseEvent&)> handler)
+    template <class T>
+    T *BasePresenter<T>::getModel()
+    {
+        return &model_;
+    }
+
+    template <class T>
+    void BasePresenter<T>::registerEvent(BaseEvent event, std::function<void(BaseEvent&)> handler)
     {
         callbacks_[event.eventType] = handler;
     }
 
-    void BasePresenter::addEvent(BaseEvent &event)
+    template <class T>
+    void BasePresenter<T>::addEvent(BaseEvent &event)
     {
         auto element = callbacks_.find(event.eventType);
         if (element != callbacks_.end())
@@ -33,12 +42,14 @@ namespace BaseMvp {
         }
     }
 
-    void BasePresenter::subscribe(std::weak_ptr<BasePrimeSubscriber> subscriber)
+    template <class T>
+    void BasePresenter<T>::subscribe(std::weak_ptr<BasePrimeSubscriber> subscriber)
     {
         subscribers_.push_back(subscriber);
     }
 
-    void BasePresenter::unsubscribe(std::weak_ptr<BasePrimeSubscriber> subscriber)
+    template <class T>
+    void BasePresenter<T>::unsubscribe(std::weak_ptr<BasePrimeSubscriber> subscriber)
     {
         subscribers_.erase(std::remove_if(subscribers_.begin(), subscribers_.end(),
             [subscriber](const auto& weak_ptr) {
@@ -47,7 +58,8 @@ namespace BaseMvp {
         ), subscribers_.end());
     }
 
-    void BasePresenter::notifySubscribers(BaseNotification &type)
+    template <class T>
+    void BasePresenter<T>::notifySubscribers(BaseNotification &type)
     {
         for(const auto&ptr : subscribers_) {
             if(auto subscriber = ptr.lock()) {

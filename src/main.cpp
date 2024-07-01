@@ -2,19 +2,10 @@
 #include <iostream>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
-#include "mvp/interfaces/base_pub_sub.hpp"
-#include "ui/models/main_model.hpp"
-#include "ui/presenters/main_presenter.hpp"
-#include "ui/views/main_tab/main_tab_view.hpp"
+#include "presenters/main_presenter.hpp"
 
 #define SCREEN_SIZE_W     800
 #define SCREEN_SIZE_H     480
-
-/**
- * TODO,
- *     * add styling to specific class.
- *     * interface should pass by reference not by value.
- */
 
 
 /*******************************************************************************
@@ -29,70 +20,11 @@
 static lv_display_t * hal_init(int32_t w, int32_t h);
 
 
-
-
 int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
 
-    // Initialize LVGL.
-    // lv_init();
-
-    // // Initialize the HAL (display, input devices, tick) for LVGL.
-    // hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
-
-    // lv_disp_t * dispp = lv_display_get_default();
-    // lv_theme_t * theme = lv_theme_default_init(dispp,
-    //                                            lv_palette_main(LV_PALETTE_BLUE),
-    //                                            lv_palette_main(LV_PALETTE_RED),
-    //                                            false,
-    //                                            LV_FONT_DEFAULT);
-
-    // lv_disp_set_theme(dispp, theme);
-    // static lv_obj_t* active_screen = lv_obj_create(NULL);
-
-    TestEvent1 test1;
-    TestEvent2 test2;
-
-    MainAppPresenter mainPresenter;
-    MainAppPresenter mainPresenter2;
-
-    mainPresenter.addEvent(test1);
-    mainPresenter.addEvent(test2);
-
-    mainPresenter2.addEvent(test1);
-    mainPresenter2.addEvent(test2);
-
-    // // Initialize model and publisher.
-    // LvUi::MainModel mainModel;
-    // LvUi::MainPresenter mainPresenter(&mainModel);
-
-    // // Main tab view.
-    // auto mainTabiew = std::make_shared<LvUi::MainTabView>(&mainPresenter);
-    // mainPresenter.subscribe(mainTabiew);
-    // mainTabiew->init(active_screen);
-
-    // // Menu tab.
-    // auto menuTab = std::make_shared<LvUi::MenuView>(&mainPresenter);
-    // mainPresenter.subscribe(menuTab);
-    // menuTab->init();
-
-    // // ECG tab.
-    // auto ecgTab = std::make_shared<LvUi::EcgView>(&mainPresenter);
-    // mainPresenter.subscribe(ecgTab);
-    // ecgTab->init();
-
-    // // Oxygen tab view.
-    // auto oxygenTab = std::make_shared<LvUi::OxygenView>(&mainPresenter);
-    // mainPresenter.subscribe(oxygenTab);
-    // oxygenTab->init();
-
-    // lv_disp_load_scr(active_screen);
-
-    // while(1) {
-    //   lv_timer_handler();
-    //   usleep(5 * 1000);
-    // }
+    // LvUi::MainAppPresenter mainPresenter;
 
     return 0;
 }

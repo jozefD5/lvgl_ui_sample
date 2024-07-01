@@ -29,12 +29,15 @@ namespace BaseMvp {
      *        notify subscribers of any change in state.
      *
      ******************************************************************************/
+    template<class T>
     class BasePresenter {
         private:
             static inline int nextId_;
             int id_;
             std::map<int, std::function<void(BaseEvent&)>> callbacks_;
             std::vector<std::weak_ptr<BasePrimeSubscriber>> subscribers_;
+            T model_;
+        public:
 
         protected:
             /*******************************************************************************
@@ -55,6 +58,13 @@ namespace BaseMvp {
              * @return int id of current instance.
              ******************************************************************************/
             int getId();
+
+            /*******************************************************************************
+             * @brief Get the Model object
+             *
+             * @return T pointer to object of type T.
+             ******************************************************************************/
+            T* getModel();
 
             /*******************************************************************************
              * @brief Add event to be handled. This should be called from
@@ -89,6 +99,8 @@ namespace BaseMvp {
              *
              ******************************************************************************/
             void notifySubscribers(BaseNotification &type);
+
+
 
 
     };
