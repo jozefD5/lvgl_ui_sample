@@ -17,3 +17,7 @@ If Project was cloned using standard setup, run following command from project r
 ```
 git submodule update --init --recursive
 ```
+
+
+# Pub / Sub and MVP
+Publisher and subscriber interface used in this application is highted in [MVP](docs/MVP.md).
