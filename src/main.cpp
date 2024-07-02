@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
 
-    // LvUi::MainAppPresenter mainPresenter;
+    LvUi::MainPresenter presenter;
 
     return 0;
 }
