@@ -3,9 +3,12 @@
 
 namespace BaseMvp {
 
-    BaseEvent::BaseEvent(int type): eventType(type)
+    BaseEvent::BaseEvent(int type): eventType_(type)
     {
     }
 
-
+    int BaseEvent::getType()
+    {
+        return eventType_;
+    }
 }

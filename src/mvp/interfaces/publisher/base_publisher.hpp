@@ -16,10 +16,13 @@ namespace BaseMvp {
      *
      ******************************************************************************/
     class BaseEvent {
-        public:
-            int eventType;
+        private:
+            int eventType_;
 
+        public:
             BaseEvent(int type);
+
+            int getType();
     };
 
 
@@ -46,7 +49,7 @@ namespace BaseMvp {
              *
              ******************************************************************************/
             void registerEvent(BaseEvent event, std::function<void(BaseEvent&)> handler) {
-                callbacks_[event.eventType] = handler;
+                callbacks_[event.eventType_] = handler;
             }
 
         public:
@@ -82,7 +85,7 @@ namespace BaseMvp {
              *
              ******************************************************************************/
             void addEvent(BaseEvent &event) {
-                auto element = callbacks_.find(event.eventType);
+                auto element = callbacks_.find(event.eventType_);
                 if (element != callbacks_.end())
                 {
                     element->second(event);
