@@ -1,6 +1,6 @@
 #pragma once
 #include "lvgl/lvgl.h"
-#include "mvp/interfaces/subscriber/base_subscriber.hpp"
+#include "mvp/interfaces/base_pub_sub.hpp"
 
 namespace LvUi {
 

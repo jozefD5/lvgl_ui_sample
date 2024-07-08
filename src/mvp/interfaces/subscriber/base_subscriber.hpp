@@ -3,26 +3,14 @@
 #include <map>
 #include <functional>
 #include <memory>
+#include "../notifications/notifications.hpp"
 
 namespace BaseMvp {
-    /*******************************************************************************
-     * @brief Base notification used by presenter to notify subscribers of
-     *        any change. Presenters sends notification to subscribers to
-     *        alert of specific change in state.
-     *
-     ******************************************************************************/
-    class BaseNotification {
-        public:
-            int presenterId;
-            int notificationType;
-
-            BaseNotification(int id , int type);
-    };
-
 
     /*******************************************************************************
-     * @brief
-     *
+     * @brief Base subscriber allows to subscriber to subscriber to presenter
+     *        to receive notifications of any state changes. It also allows
+     *        to to send events to presenter (request action).
      *
      ******************************************************************************/
     class BaseSubscriber {

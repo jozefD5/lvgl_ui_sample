@@ -1,12 +1,8 @@
 #include <iostream>
 #include "base_subscriber.hpp"
 
-namespace BaseMvp {
-    BaseNotification::BaseNotification(int id, int type)
-        : presenterId(id), notificationType(type)
-    {
-    }
 
+namespace BaseMvp {
 
     void BaseSubscriber::registerNotification(BaseNotification notification, std::function<void(BaseNotification&)> handler)
     {

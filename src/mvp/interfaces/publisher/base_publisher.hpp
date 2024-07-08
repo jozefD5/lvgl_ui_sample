@@ -4,28 +4,9 @@
 #include <functional>
 #include <memory>
 #include "../subscriber/base_subscriber.hpp"
-
+#include "../notifications/notifications.hpp"
 
 namespace BaseMvp {
-
-    /*******************************************************************************
-     * @brief Base event used for notifying presenter to initiate specific
-     *        action. Subscriber sends event to presenter to initiate action.
-     *        If more flexibility is required, sub class can derive from
-     *        this class and provide additional functionality. Each event should
-     *        have a unique id.
-     *
-     ******************************************************************************/
-    class BaseEvent {
-        private:
-            int eventType_;
-
-        public:
-            BaseEvent(int type);
-
-            int getType();
-    };
-
 
     /*******************************************************************************
      * @brief Core functionality of presenter is to handler business logic and

@@ -1,7 +1,7 @@
 #pragma once
 #include "lvgl/lvgl.h"
 #include "models/main_model.hpp"
-#include "mvp/interfaces/publisher/base_publisher.hpp"
+#include "mvp/interfaces/base_pub_sub.hpp"
 
 
 
