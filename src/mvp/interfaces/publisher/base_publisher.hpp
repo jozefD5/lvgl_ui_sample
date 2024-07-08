@@ -9,12 +9,12 @@
 namespace BaseMvp {
 
     /*******************************************************************************
-     * @brief Core functionality of presenter is to handler business logic and
+     * @brief Core functionality of publisher is to handler business logic and
      *        notify subscribers of any change in state.
      *
      ******************************************************************************/
     template <class T>
-    class BasePresenter {
+    class BasePublisher {
         private:
             static inline int nextId_;
             int id_;
@@ -35,7 +35,7 @@ namespace BaseMvp {
             }
 
         public:
-            BasePresenter() {
+            BasePublisher() {
                 id_ = nextId_;
                 nextId_++;
             }
@@ -60,7 +60,7 @@ namespace BaseMvp {
 
             /*******************************************************************************
              * @brief Add event to be handled. This should be called from
-             *        subscriber to to notify presenter of that action  is
+             *        subscriber to to notify publisher of that action  is
              *        required.
              *
              * @param event Event to be handled.
@@ -85,7 +85,7 @@ namespace BaseMvp {
             }
 
             /*******************************************************************************
-             * @brief Unsubscribe from presenter.
+             * @brief Unsubscribe from publisher.
              *
              * @param subscriber subscriber to be removed.
              *

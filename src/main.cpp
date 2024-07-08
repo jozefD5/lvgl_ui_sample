@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     (void)argv;
 
     LvUi::MainPresenter mainPresenter;
-    LvUi::EcgView ecgView;
+    // LvUi::EcgView ecgView(&mainPresenter);
 
 
 

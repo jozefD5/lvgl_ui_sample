@@ -7,10 +7,10 @@
 
 namespace LvUi {
 
-    class MainPresenter : public BaseMvp::BasePresenter<LvUi::MainModel> {
+    class MainPresenter : public BaseMvp::BasePublisher<LvUi::MainModel> {
 
         public:
-            MainPresenter() : BaseMvp::BasePresenter<MainModel>(){}
+            MainPresenter() : BaseMvp::BasePublisher<MainModel>(){}
 
     };
 
