@@ -10,7 +10,8 @@ namespace BaseMvp {
 
     /*******************************************************************************
      * @brief Base event used for notifying presenter to initiate specific
-     *        action. If mre flexibility is required, sub class can derive from
+     *        action. Subscriber sends event to presenter to initiate action.
+     *        If more flexibility is required, sub class can derive from
      *        this class and provide additional functionality. Each event should
      *        have a unique id.
      *
@@ -37,7 +38,7 @@ namespace BaseMvp {
             static inline int nextId_;
             int id_;
             std::map<int, std::function<void(BaseEvent&)>> callbacks_;
-            std::vector<std::weak_ptr<BasePrimeSubscriber>> subscribers_;
+            std::vector<std::weak_ptr<BaseSubscriber>> subscribers_;
             T model_;
 
         protected:
@@ -98,7 +99,7 @@ namespace BaseMvp {
              * @param subscriber Subscriber to be added.
              *
              ******************************************************************************/
-            void subscribe(std::weak_ptr<BasePrimeSubscriber> subscriber) {
+            void subscribe(std::weak_ptr<BaseSubscriber> subscriber) {
                 subscribers_.push_back(subscriber);
             }
 
@@ -108,7 +109,7 @@ namespace BaseMvp {
              * @param subscriber subscriber to be removed.
              *
              ******************************************************************************/
-            void unsubscribe(std::weak_ptr<BasePrimeSubscriber> subscriber) {
+            void unsubscribe(std::weak_ptr<BaseSubscriber> subscriber) {
                 subscribers_.erase(std::remove_if(subscribers_.begin(), subscribers_.end(),
                     [subscriber](const auto& weak_ptr) {
                         return subscriber.expired();

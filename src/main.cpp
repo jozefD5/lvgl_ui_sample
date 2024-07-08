@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include "lvgl/lvgl.h"
 #include "presenters/main_presenter.hpp"
+#include "views/ecg_view/ecg_view.hpp"
 
 #define SCREEN_SIZE_W     800
 #define SCREEN_SIZE_H     480
@@ -24,7 +25,10 @@ int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
 
-    LvUi::MainPresenter presenter;
+    LvUi::MainPresenter mainPresenter;
+    LvUi::EcgView ecgView;
+
+
 
     return 0;
 }

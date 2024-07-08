@@ -2,7 +2,6 @@
 #include "lvgl/lvgl.h"
 #include "models/main_model.hpp"
 #include "mvp/interfaces/publisher/base_publisher.hpp"
-#include "mvp/interfaces/subscriber/base_subscriber.hpp"
 
 
 

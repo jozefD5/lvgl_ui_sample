@@ -7,7 +7,8 @@
 namespace BaseMvp {
     /*******************************************************************************
      * @brief Base notification used by presenter to notify subscribers of
-     * any change in state.
+     *        any change. Presenters sends notification to subscribers to
+     *        alert of specific change in state.
      *
      ******************************************************************************/
     class BaseNotification {
@@ -19,7 +20,12 @@ namespace BaseMvp {
     };
 
 
-    class BasePrimeSubscriber {
+    /*******************************************************************************
+     * @brief
+     *
+     *
+     ******************************************************************************/
+    class BaseSubscriber {
         public:
             std::map<std::pair<int, int>, std::function<void(BaseNotification&)>> callbacks_;
 

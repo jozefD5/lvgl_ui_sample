@@ -8,12 +8,12 @@ namespace BaseMvp {
     }
 
 
-    void BasePrimeSubscriber::registerNotification(BaseNotification notification, std::function<void(BaseNotification&)> handler)
+    void BaseSubscriber::registerNotification(BaseNotification notification, std::function<void(BaseNotification&)> handler)
     {
         callbacks_[std::make_pair(notification.notificationType, notification.presenterId)] = handler;
     }
 
-    void BasePrimeSubscriber::onNotify(BaseNotification &notification)
+    void BaseSubscriber::onNotify(BaseNotification &notification)
     {
         auto searchResult = callbacks_
             .find(std::make_pair(notification.notificationType, notification.presenterId));
