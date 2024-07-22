@@ -15,6 +15,10 @@ namespace LvUi {
         public:
             EcgView(BaseMvp::BasePublisher<LvUi::MainModel>* mainPublisher);
 
+            void view() {
+
+            }
+
 
     };
 

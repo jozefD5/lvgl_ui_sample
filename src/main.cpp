@@ -25,8 +25,10 @@ int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
 
+    std::cout << "LVGL - Monitoring\n\n\r";
+
     LvUi::MainPresenter mainPresenter;
-    // LvUi::EcgView ecgView(&mainPresenter);
+    LvUi::EcgView ecgView(&mainPresenter);
 
 
 
