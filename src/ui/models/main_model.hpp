@@ -35,5 +35,7 @@ namespace LvUi {
             std::string temperatureSufix;
 
             MainModel();
+
+            std::string getTemperatureSufix(uint8_t index);
     };
 }

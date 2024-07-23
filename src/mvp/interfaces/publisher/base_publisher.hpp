@@ -18,7 +18,7 @@ namespace BaseMvp {
         private:
             static inline int nextId_;
             int id_;
-            std::map<int, std::function<void(BaseEvent&)>> callbacks_;
+            std::map<int, std::function<void(void *data)>> callbacks_;
             std::vector<std::weak_ptr<BaseSubscriber>> subscribers_;
             T model_;
 
@@ -30,8 +30,8 @@ namespace BaseMvp {
              * @param handler handler to be associated with event.
              *
              ******************************************************************************/
-            void registerEvent(BaseEvent event, std::function<void(BaseEvent&)> handler) {
-                callbacks_[event.eventType_] = handler;
+            void registerEvent(BaseEvent event, std::function<void(void *data)> handler) {
+                callbacks_[event.getType()] = handler;
             }
 
         public:
@@ -67,7 +67,7 @@ namespace BaseMvp {
              *
              ******************************************************************************/
             void addEvent(BaseEvent &event) {
-                auto element = callbacks_.find(event.eventType_);
+                auto element = callbacks_.find(event.getType());
                 if (element != callbacks_.end())
                 {
                     element->second(event);
