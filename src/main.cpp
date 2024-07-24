@@ -28,7 +28,10 @@ int main(int argc, char **argv) {
     std::cout << "LVGL - Monitoring\n\n\r";
 
     LvUi::MainPresenter mainPresenter;
-    LvUi::EcgView ecgView(&mainPresenter);
+
+    auto event = BaseMvp::BaseEvent(LvUi::UpdateTemperatureUnit);
+    auto data = LvUi::TemperatureUnit::Celsius;
+    mainPresenter.addEvent(event, &data);
 
 
 

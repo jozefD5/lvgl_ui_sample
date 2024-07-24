@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 
+
 namespace BaseMvp {
     /*******************************************************************************
      * @brief Base notification used by presenter to notify subscribers of

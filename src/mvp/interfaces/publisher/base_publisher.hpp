@@ -18,7 +18,7 @@ namespace BaseMvp {
         private:
             static inline int nextId_;
             int id_;
-            std::map<int, std::function<void(void *data)>> callbacks_;
+            std::map<int, std::function<void(const void *data)>> callbacks_;
             std::vector<std::weak_ptr<BaseSubscriber>> subscribers_;
             T model_;
 
@@ -30,7 +30,7 @@ namespace BaseMvp {
              * @param handler handler to be associated with event.
              *
              ******************************************************************************/
-            void registerEvent(BaseEvent event, std::function<void(void *data)> handler) {
+            void registerEvent(BaseEvent event, std::function<void(const void *data)> handler) {
                 callbacks_[event.getType()] = handler;
             }
 
@@ -62,15 +62,20 @@ namespace BaseMvp {
              * @brief Add event to be handled. This should be called from
              *        subscriber to to notify publisher of that action  is
              *        required.
+             *        To add callback/handler, use std::bind. This allows you
+             *        to specify function to bi bind , object to be bind to
+             *        and arguments.
              *
              * @param event Event to be handled.
+             * @param data data to be passed to event (callback/handler). If
+             *             no data are passed, set to null.
              *
              ******************************************************************************/
-            void addEvent(BaseEvent &event) {
+            void addEvent(BaseEvent &event, const void *data) {
                 auto element = callbacks_.find(event.getType());
                 if (element != callbacks_.end())
                 {
-                    element->second(event);
+                    element->second(data);
                 }
             }
 
