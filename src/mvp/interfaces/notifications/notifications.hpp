@@ -14,6 +14,7 @@ namespace BaseMvp {
             int presenterId;
             int notificationType;
 
+        public:
             BaseNotification(int id , int type);
     };
 
@@ -26,13 +27,13 @@ namespace BaseMvp {
      *
      ******************************************************************************/
     class BaseEvent {
-        private:
-            int eventType_;
-
         public:
             BaseEvent(int type);
 
             int getType();
+
+        private:
+            int eventType_;
     };
 
 }

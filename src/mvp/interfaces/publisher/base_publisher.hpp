@@ -15,24 +15,6 @@ namespace BaseMvp {
      ******************************************************************************/
     template <class T>
     class BasePublisher {
-        private:
-            static inline int nextId_;
-            int id_;
-            std::map<int, std::function<void(const void *data)>> callbacks_;
-            std::vector<std::weak_ptr<BaseSubscriber>> subscribers_;
-            T model_;
-
-        protected:
-            /*******************************************************************************
-             * @brief Register event with handler (callback).
-             *
-             * @param event Event to be registered.
-             * @param handler handler to be associated with event.
-             *
-             ******************************************************************************/
-            void registerEvent(BaseEvent event, std::function<void(const void *data)> handler) {
-                callbacks_[event.getType()] = handler;
-            }
 
         public:
             BasePublisher() {
@@ -117,6 +99,24 @@ namespace BaseMvp {
                 }
             }
 
+        protected:
+            /*******************************************************************************
+             * @brief Register event with handler (callback).
+             *
+             * @param event Event to be registered.
+             * @param handler handler to be associated with event.
+             *
+             ******************************************************************************/
+            void registerEvent(BaseEvent event, std::function<void(const void *data)> handler) {
+                callbacks_[event.getType()] = handler;
+            }
+
+        private:
+            static inline int nextId_;
+            int id_;
+            std::map<int, std::function<void(const void *data)>> callbacks_;
+            std::vector<std::weak_ptr<BaseSubscriber>> subscribers_;
+            T model_;
     };
 
 }

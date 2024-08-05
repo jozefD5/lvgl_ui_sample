@@ -17,16 +17,6 @@ namespace BaseMvp {
         public:
             std::map<std::pair<int, int>, std::function<void(BaseNotification&)>> callbacks_;
 
-        protected:
-            /*******************************************************************************
-             * @brief Register notification with handler (callback).
-             *
-             * @param notification notification to be registered.
-             * @param handler handler to be associated with notification.
-             *
-             ******************************************************************************/
-            void registerNotification(BaseNotification notification, std::function<void(BaseNotification&)> handler);
-
         public:
             /*******************************************************************************
              * @brief Subscriber notification event receive method. Call required callback
@@ -36,6 +26,15 @@ namespace BaseMvp {
              *
              ******************************************************************************/
             void onNotify(BaseNotification &notification);
-    };
 
+        protected:
+            /*******************************************************************************
+             * @brief Register notification with handler (callback).
+             *
+             * @param notification notification to be registered.
+             * @param handler handler to be associated with notification.
+             *
+             ******************************************************************************/
+            void registerNotification(BaseNotification notification, std::function<void(BaseNotification&)> handler);
+    };
 }

@@ -20,9 +20,6 @@ namespace LvUi {
      *
      ******************************************************************************/
     class MainModel {
-        private:
-            std::vector<std::string> temperatureUintsSufix;
-
         public:
             // Chart series.
             lv_chart_series_t ecgDataSerias;
@@ -37,5 +34,8 @@ namespace LvUi {
             MainModel();
 
             std::string getTemperatureSufix(uint8_t index);
+
+        private:
+            std::vector<std::string> temperatureUintsSufix;
     };
 }

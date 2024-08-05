@@ -28,6 +28,16 @@ namespace LvUi {
      *
      ******************************************************************************/
     class MainPresenter : public BaseMvp::BasePublisher<LvUi::MainModel> {
+        public:
+            MainPresenter() : BaseMvp::BasePublisher<MainModel>(){
+
+                // Register events.
+                registerEvent(
+                    BaseMvp::BaseEvent(UpdateTemperatureUnit),
+                    std::bind(&MainPresenter::updateTemperatureUnit, this, std::placeholders::_1)
+                );
+            }
+
         private:
             /*******************************************************************************
              * @brief Update temperature unit. available units are celsius
@@ -49,16 +59,6 @@ namespace LvUi {
                 }
 
                 std::cout << "Update temperature unit: " << getModel()->temperatureSufix << std::endl;
-            }
-
-        public:
-            MainPresenter() : BaseMvp::BasePublisher<MainModel>(){
-
-                // Register events.
-                registerEvent(
-                    BaseMvp::BaseEvent(UpdateTemperatureUnit),
-                    std::bind(&MainPresenter::updateTemperatureUnit, this, std::placeholders::_1)
-                );
             }
 
     };
