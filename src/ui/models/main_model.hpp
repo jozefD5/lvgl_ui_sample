@@ -4,21 +4,15 @@
 #include "lvgl/lvgl.h"
 
 namespace LvUi {
-    /*******************************************************************************
-     * @brief Temperature units enum.
-     *
-     ******************************************************************************/
+    /// @brief Temperature units enum.
     enum class TemperatureUnit{
         Celsius,
         Fahrenheit
     };
 
 
-    /*******************************************************************************
-     * @brief Main application model, holds key application data that are shared
-     *        between multiple views.
-     *
-     ******************************************************************************/
+    /// @brief Main application model, holds key application data that are shared
+    ///        between multiple views.
     class MainModel {
         public:
             // Chart series.

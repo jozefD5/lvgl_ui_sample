@@ -9,24 +9,16 @@
 
 
 namespace LvUi {
-
-    /*******************************************************************************
-     * @brief Main presenter events enum, includes all events main presenter
-     *        can handle.
-     *
-     ******************************************************************************/
+    /// @brief Main presenter events enum, includes all events main presenter
+    ///        can handle.
     typedef enum {
         UpdateTemperatureUnit = 0,
 
     } MainPresenterEvent;
 
 
-
-    /*******************************************************************************
-     * @brief Main presenter, handles core and shared business logic across
-     *        multiple UI views
-     *
-     ******************************************************************************/
+    /// @brief Main presenter, handles core and shared business logic across
+    ///        multiple UI views
     class MainPresenter : public BaseMvp::BasePublisher<LvUi::MainModel> {
         public:
             MainPresenter() : BaseMvp::BasePublisher<MainModel>(){
@@ -39,14 +31,10 @@ namespace LvUi {
             }
 
         private:
-            /*******************************************************************************
-             * @brief Update temperature unit. available units are celsius
-             *        and fahrenheit.
-             *
-             * @param data temperature unit, needs to be of type
-             *        const TemperatureUnit*
-             *
-             ******************************************************************************/
+            /// @brief Update temperature unit. available units are celsius
+            ///        and fahrenheit.
+            /// @param data temperature unit, needs to be of type
+            //        const TemperatureUnit*
             void updateTemperatureUnit(const void *data) {
                 const TemperatureUnit *temperatureUnit = (TemperatureUnit*)data;
 
