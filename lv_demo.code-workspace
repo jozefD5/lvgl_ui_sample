@@ -100,7 +100,9 @@
 			"streambuf": "cpp",
 			"thread": "cpp",
 			"typeinfo": "cpp",
-			"map": "cpp"
+			"map": "cpp",
+			"optional": "cpp",
+			"ranges": "cpp"
 		},
 		"cSpell.languageSettings": [
 			// Spell check for cpp and c files
@@ -119,8 +121,8 @@
 				]
 			}
 		],
-		"doxdocgen.c.firstLine": "/*******************************************************************************",
-    	"doxdocgen.c.lastLine": " ******************************************************************************/",
+		"doxdocgen.c.firstLine": "",
+    	"doxdocgen.c.lastLine": "",
     	"doxdocgen.generic.order": [
 			"file",
 			"brief",
@@ -131,6 +133,11 @@
 		],
 		"cSpell.words": [
 			"LVGL"
+		],
+		"doxdocgen.c.triggerSequence": "///",
+		"doxdocgen.c.commentPrefix": "/// ",
+		"doxdocgen.generic.customTags": [
+
 		],
 	},
 	// tasks.json section
