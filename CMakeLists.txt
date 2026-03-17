@@ -19,26 +19,25 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/core
 )
 
-add_executable(${PROJECT_NAME} src/main.cpp  src/mouse_cursor_icon.c  src/main.h)
+add_executable(${PROJECT_NAME} src/main.cpp  src/mouse_cursor_icon.c  src/main.hpp)
 target_compile_definitions(${PROJECT_NAME} PRIVATE LV_CONF_INCLUDE_SIMPLE)
 set(LV_CONF_PATH ${CMAKE_CURRENT_SOURCE_DIR}/lv_conf.h CACHE STRING "" FORCE)
 
 add_subdirectory(lvgl)
-add_subdirectory(${CMAKE_SOURCE_DIR}/src/mvp)
+add_subdirectory(${CMAKE_SOURCE_DIR}/src//mvp)
+add_subdirectory(${CMAKE_SOURCE_DIR}/src/ui)
 target_link_libraries(
     ${PROJECT_NAME}
     ${SDL2_LIBRARIES}
     lvgl lvgl::thorvg
     m pthread
-    mpv
+    mpv_base
+    ui_module
 )
 
 
 if(LV_USE_DRAW_SDL)
     set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
-    # Need to install libsdl2-image-dev
-    # `sudo apt install libsdl2-image-dev`
-    # `brew install sdl2_image`
     find_package(SDL2_image REQUIRED)
     target_include_directories(lvgl PUBLIC ${SDL2_IMAGE_INCLUDE_DIRS})
     target_link_libraries(main ${SDL2_IMAGE_LIBRARIES} CoreLib)

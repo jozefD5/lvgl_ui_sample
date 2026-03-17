@@ -2,54 +2,11 @@
 #include <iostream>
 #include <unistd.h>
 #include "lvgl/lvgl.h"
-#include "views/ecg_view/ecg_view.h"
-#include "presenters/ecg_presenter/ecg_presenter.h"
+#include "presenters/main_presenter.hpp"
+#include "views/ecg_view/ecg_view.hpp"
 
-#define SCREEN_SIZE_W     1280
-#define SCREEN_SIZE_H     720
-
-
-/*******************************************************************************
- * Function prototype
- ******************************************************************************/
-static lv_display_t * hal_init(int32_t w, int32_t h);
-
-
-/*******************************************************************************
- * Private Static variables
- ******************************************************************************/
-
-
-
-
-
-int main(int argc, char **argv) {
-    (void)argc; /*Unused*/
-    (void)argv; /*Unused*/
-
-    /*Initialize LVGL*/
-    lv_init();
-
-    /*Initialize the HAL (display, input devices, tick) for LVGL*/
-    hal_init(SCREEN_SIZE_W, SCREEN_SIZE_H);
-
-    // Main view background color.
-    lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(BACKGROUN_COLOR), LV_PART_MAIN);
-
-    // Main view.
-    LvUi::EcgView ecgView(SCREEN_SIZE_W, SCREEN_SIZE_H);
-    LvUi::EcgModel ecgModel;
-
-    LvUi::EcgPresenter ecgPresenter(&ecgView, &ecgModel);
-
-    while(1) {
-      lv_timer_handler();
-      usleep(5 * 1000);
-    }
-
-    return 0;
-}
-
+#define SCREEN_SIZE_W     800
+#define SCREEN_SIZE_H     480
 
 
 /*******************************************************************************
@@ -61,9 +18,30 @@ int main(int argc, char **argv) {
  *
  * @return lv_display_t* pointer to structure representing display.
  ******************************************************************************/
+static lv_display_t * hal_init(int32_t w, int32_t h);
+
+
+int main(int argc, char **argv) {
+    (void)argc;
+    (void)argv;
+
+    std::cout << "LVGL - Monitoring\n\n\r";
+
+    LvUi::MainPresenter mainPresenter;
+
+    auto event = BaseMvp::BaseEvent(LvUi::UpdateTemperatureUnit);
+    auto data = LvUi::TemperatureUnit::Celsius;
+    mainPresenter.addEvent(event, &data);
+
+
+
+    return 0;
+}
+
+
+// Initialize the Hardware Abstraction Layer (HAL).
 static lv_display_t * hal_init(int32_t w, int32_t h)
 {
-
   lv_group_set_default(lv_group_create());
 
   lv_display_t* disp = lv_sdl_window_create(w, h);
